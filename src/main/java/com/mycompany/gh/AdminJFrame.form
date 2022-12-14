@@ -37,7 +37,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanel1">
+        <Container class="javax.swing.JPanel" name="attendance">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="&#x41f;&#x43e;&#x441;&#x435;&#x449;&#x430;&#x435;&#x43c;&#x43e;&#x441;&#x442;&#x44c;">
@@ -49,32 +49,17 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="759" max="32767" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="0" pref="900" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="995" max="32767" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="0" pref="469" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
-          <SubComponents>
-            <Component class="javax.swing.JButton" name="jButton2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&#x41a;&#x43b;&#x430;&#x441;&#x441;"/>
-              </Properties>
-            </Component>
-          </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel3">
+        <Container class="javax.swing.JPanel" name="partsOrder">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="&#x417;&#x430;&#x43a;&#x430;&#x437; &#x434;&#x435;&#x442;&#x430;&#x43b;&#x435;&#x439;">
@@ -91,12 +76,12 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1093" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="469" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel4">
+        <Container class="javax.swing.JPanel" name="partsDB">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="&#x421;&#x43a;&#x43b;&#x430;&#x434; &#x434;&#x435;&#x442;&#x430;&#x43b;&#x435;&#x439;">
@@ -113,12 +98,12 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1093" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="469" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel5">
+        <Container class="javax.swing.JPanel" name="newRecords">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="&#x41d;&#x43e;&#x432;&#x44b;&#x435; &#x437;&#x430;&#x43f;&#x438;&#x441;&#x438;">
@@ -135,12 +120,12 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1093" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="469" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel2">
+        <Container class="javax.swing.JPanel" name="main">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="&#x413;&#x43b;&#x430;&#x432;&#x43d;&#x430;&#x44f;">
@@ -154,10 +139,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" pref="177" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" pref="325" max="-2" attributes="0"/>
-                      <EmptySpace pref="369" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="marketYearsPlane" min="-2" pref="279" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="expertMechanicsPlane" min="-2" pref="257" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="guaranteesPlane" min="-2" pref="257" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="tonAuto" min="-2" pref="173" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="72" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -165,37 +157,99 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2" min="-2" pref="215" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="101" max="-2" attributes="0"/>
+                      <Component id="tonAuto" min="-2" pref="82" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="expertMechanicsPlane" max="32767" attributes="0"/>
+                          <Component id="marketYearsPlane" max="32767" attributes="0"/>
+                          <Component id="guaranteesPlane" alignment="0" pref="125" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="861" max="32767" attributes="0"/>
+                      <EmptySpace pref="227" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="tonAuto">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tw Cen MT" size="36" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="TonAuto"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
-              <Properties>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/com/mycompany/gh/eTbzeXvsOh4.jpg"/>
-                </Property>
-                <Property name="debugGraphicsOptions" type="int" value="-1"/>
-                <Property name="disabledIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="0" name="null"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
+                    <MatteColorBorder/>
+                  </Border>
                 </Property>
               </Properties>
             </Component>
+            <Container class="javax.swing.JScrollPane" name="expertMechanicsPlane">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="expertMechanicsLabel">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI Semibold" size="12" style="0"/>
+                    </Property>
+                    <Property name="rows" type="int" value="5"/>
+                    <Property name="text" type="java.lang.String" value="&#x41e;&#x41f;&#x42b;&#x422;&#x41d;&#x42b;&#x415; &#x41c;&#x410;&#x421;&#x422;&#x415;&#x420;&#x410;&#xa;&#xa;&#x420;&#x435;&#x433;&#x443;&#x43b;&#x44f;&#x440;&#x43d;&#x43e;&#x435; &#x43f;&#x43e;&#x432;&#x44b;&#x448;&#x435;&#x43d;&#x438;&#x435; &#x43a;&#x432;&#x430;&#x43b;&#x438;&#x444;&#x438;&#x43a;&#x430;&#x446;&#x438;&#x438;, &#xa;&#x43e;&#x431;&#x443;&#x447;&#x435;&#x43d;&#x438;&#x435; &#x438; &#x441;&#x43e;&#x432;&#x440;&#x435;&#x43c;&#x435;&#x43d;&#x43d;&#x43e;&#x435; &#x43e;&#x431;&#x43e;&#x440;&#x443;&#x434;&#x43e;&#x432;&#x430;&#x43d;&#x438;&#x435; &#xa;&#x43f;&#x43e;&#x437;&#x432;&#x43e;&#x43b;&#x44f;&#x44e;&#x442; &#x43d;&#x430;&#x43c; &#x43e;&#x431;&#x435;&#x441;&#x43f;&#x435;&#x447;&#x438;&#x442;&#x44c; &#x432;&#x44b;&#x441;&#x43e;&#x43a;&#x43e;&#x435; &#xa;&#x43a;&#x430;&#x447;&#x435;&#x441;&#x442;&#x432;&#x43e; &#x438;&#x441;&#x43f;&#x43e;&#x43b;&#x43d;&#x435;&#x43d;&#x438;&#x44f; &#x43b;&#x44e;&#x431;&#x44b;&#x445; &#x440;&#x430;&#x431;&#x43e;&#x442; &#x43f;&#x43e; &#xa;&#x440;&#x435;&#x43c;&#x43e;&#x43d;&#x442;&#x443; &#x430;&#x432;&#x442;&#x43e;&#x43c;&#x43e;&#x431;&#x438;&#x43b;&#x44f;."/>
+                    <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                      <Insets value="[3, 10, 3, 10]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JScrollPane" name="marketYearsPlane">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="marketYearsLabel">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI Semibold" size="12" style="0"/>
+                    </Property>
+                    <Property name="rows" type="int" value="5"/>
+                    <Property name="text" type="java.lang.String" value="24 &#x413;&#x41e;&#x414;&#x410; &#x41d;&#x410; &#x420;&#x42b;&#x41d;&#x41a;&#x415;&#xa;&#xa;&#x417;&#x430; &#x442;&#x430;&#x43a;&#x43e;&#x439; &#x441;&#x440;&#x43e;&#x43a; &#x43c;&#x44b; &#x43d;&#x430;&#x43a;&#x43e;&#x43f;&#x438;&#x43b;&#x438; &#x43e;&#x433;&#x440;&#x43e;&#x43c;&#x43d;&#x44b;&#x439; &#x43e;&#x43f;&#x44b;&#x442; &#xa;&#x432; &#x440;&#x435;&#x43c;&#x43e;&#x43d;&#x442;&#x435; &#x438; &#x43e;&#x431;&#x441;&#x43b;&#x443;&#x436;&#x438;&#x432;&#x430;&#x43d;&#x438;&#x438; &#x438;&#x43d;&#x43e;&#x43c;&#x430;&#x440;&#x43e;&#x43a;, &#xa;&#x430;&#x432;&#x442;&#x43e;&#x43c;&#x43e;&#x431;&#x438;&#x43b;&#x435;&#x439; &#x43e;&#x442;&#x435;&#x447;&#x435;&#x441;&#x442;&#x432;&#x435;&#x43d;&#x43d;&#x43e;&#x433;&#x43e; &#x43f;&#x440;&#x43e;&#x438;&#x437;&#x432;&#x43e;&#x434;&#x441;&#x442;&#x432;&#x430; &#xa;&#x438; &#x43c;&#x438;&#x43a;&#x440;&#x43e;&#x430;&#x432;&#x442;&#x43e;&#x431;&#x443;&#x441;&#x43e;&#x432;."/>
+                    <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                      <Insets value="[3, 10, 3, 10]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JScrollPane" name="guaranteesPlane">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="guaranteesLabel">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI Semibold" size="12" style="0"/>
+                    </Property>
+                    <Property name="rows" type="int" value="5"/>
+                    <Property name="text" type="java.lang.String" value="&#x413;&#x410;&#x420;&#x410;&#x41d;&#x422;&#x418;&#x42f; &#x41d;&#x410; &#x420;&#x415;&#x41c;&#x41e;&#x41d;&#x422;&#xa;&#x418; &#x417;&#x410;&#x41f;&#x427;&#x410;&#x421;&#x422;&#x418;&#xa;&#xa;&#x41d;&#x430; &#x432;&#x44b;&#x43f;&#x43e;&#x43b;&#x43d;&#x435;&#x43d;&#x43d;&#x44b;&#x435; &#x440;&#x430;&#x431;&#x43e;&#x442;&#x44b; &#x438; &#x437;&#x430;&#x43f;&#x447;&#x430;&#x441;&#x442;&#x438; &#x43c;&#x44b; &#xa;&#x43f;&#x440;&#x435;&#x434;&#x43e;&#x441;&#x442;&#x430;&#x432;&#x43b;&#x44f;&#x435;&#x43c; &#x433;&#x430;&#x440;&#x430;&#x43d;&#x442;&#x438;&#x44e; &#x434;&#x43e; 1 &#x433;&#x43e;&#x434;&#x430;."/>
+                    <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                      <Insets value="[3, 10, 3, 10]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>

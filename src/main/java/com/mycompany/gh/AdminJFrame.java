@@ -27,108 +27,129 @@ public class AdminJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        attendance = new javax.swing.JPanel();
+        partsOrder = new javax.swing.JPanel();
+        partsDB = new javax.swing.JPanel();
+        newRecords = new javax.swing.JPanel();
+        main = new javax.swing.JPanel();
+        tonAuto = new javax.swing.JLabel();
+        expertMechanicsPlane = new javax.swing.JScrollPane();
+        expertMechanicsLabel = new javax.swing.JTextArea();
+        marketYearsPlane = new javax.swing.JScrollPane();
+        marketYearsLabel = new javax.swing.JTextArea();
+        guaranteesPlane = new javax.swing.JScrollPane();
+        guaranteesLabel = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton2.setText("Класс");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(jButton2)
-                .addContainerGap(759, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jButton2)
-                .addContainerGap(995, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Посещаемость", jPanel1);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout attendanceLayout = new javax.swing.GroupLayout(attendance);
+        attendance.setLayout(attendanceLayout);
+        attendanceLayout.setHorizontalGroup(
+            attendanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 900, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1093, Short.MAX_VALUE)
+        attendanceLayout.setVerticalGroup(
+            attendanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 469, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Заказ деталей", jPanel3);
+        jTabbedPane1.addTab("Посещаемость", attendance);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout partsOrderLayout = new javax.swing.GroupLayout(partsOrder);
+        partsOrder.setLayout(partsOrderLayout);
+        partsOrderLayout.setHorizontalGroup(
+            partsOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 900, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1093, Short.MAX_VALUE)
+        partsOrderLayout.setVerticalGroup(
+            partsOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 469, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Склад деталей", jPanel4);
+        jTabbedPane1.addTab("Заказ деталей", partsOrder);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout partsDBLayout = new javax.swing.GroupLayout(partsDB);
+        partsDB.setLayout(partsDBLayout);
+        partsDBLayout.setHorizontalGroup(
+            partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 900, Short.MAX_VALUE)
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1093, Short.MAX_VALUE)
+        partsDBLayout.setVerticalGroup(
+            partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 469, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Новые записи", jPanel5);
+        jTabbedPane1.addTab("Склад деталей", partsDB);
 
-        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 0, 36)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("TonAuto");
+        javax.swing.GroupLayout newRecordsLayout = new javax.swing.GroupLayout(newRecords);
+        newRecords.setLayout(newRecordsLayout);
+        newRecordsLayout.setHorizontalGroup(
+            newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 900, Short.MAX_VALUE)
+        );
+        newRecordsLayout.setVerticalGroup(
+            newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 469, Short.MAX_VALUE)
+        );
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/gh/eTbzeXvsOh4.jpg"))); // NOI18N
-        jLabel2.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        jLabel2.setDisabledIcon(null);
+        jTabbedPane1.addTab("Новые записи", newRecords);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        tonAuto.setFont(new java.awt.Font("Tw Cen MT", 0, 36)); // NOI18N
+        tonAuto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tonAuto.setText("TonAuto");
+        tonAuto.setBorder(new javax.swing.border.MatteBorder(null));
+
+        expertMechanicsLabel.setColumns(20);
+        expertMechanicsLabel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        expertMechanicsLabel.setRows(5);
+        expertMechanicsLabel.setText("ОПЫТНЫЕ МАСТЕРА\n\nРегулярное повышение квалификации, \nобучение и современное оборудование \nпозволяют нам обеспечить высокое \nкачество исполнения любых работ по \nремонту автомобиля.");
+        expertMechanicsLabel.setMargin(new java.awt.Insets(3, 10, 3, 10));
+        expertMechanicsPlane.setViewportView(expertMechanicsLabel);
+
+        marketYearsLabel.setColumns(20);
+        marketYearsLabel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        marketYearsLabel.setRows(5);
+        marketYearsLabel.setText("24 ГОДА НА РЫНКЕ\n\nЗа такой срок мы накопили огромный опыт \nв ремонте и обслуживании иномарок, \nавтомобилей отечественного производства \nи микроавтобусов.");
+        marketYearsLabel.setMargin(new java.awt.Insets(3, 10, 3, 10));
+        marketYearsPlane.setViewportView(marketYearsLabel);
+
+        guaranteesLabel.setColumns(20);
+        guaranteesLabel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        guaranteesLabel.setRows(5);
+        guaranteesLabel.setText("ГАРАНТИЯ НА РЕМОНТ\nИ ЗАПЧАСТИ\n\nНа выполненные работы и запчасти мы \nпредоставляем гарантию до 1 года.");
+        guaranteesLabel.setMargin(new java.awt.Insets(3, 10, 3, 10));
+        guaranteesPlane.setViewportView(guaranteesLabel);
+
+        javax.swing.GroupLayout mainLayout = new javax.swing.GroupLayout(main);
+        main.setLayout(mainLayout);
+        mainLayout.setHorizontalGroup(
+            mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(369, Short.MAX_VALUE))
+                .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainLayout.createSequentialGroup()
+                        .addComponent(marketYearsPlane, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(expertMechanicsPlane, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(guaranteesPlane, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tonAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        mainLayout.setVerticalGroup(
+            mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(861, Short.MAX_VALUE))
+                .addComponent(tonAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(expertMechanicsPlane)
+                    .addComponent(marketYearsPlane)
+                    .addComponent(guaranteesPlane, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Главная", jPanel2);
+        jTabbedPane1.addTab("Главная", main);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -181,14 +202,18 @@ public class AdminJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel attendance;
+    private javax.swing.JTextArea expertMechanicsLabel;
+    private javax.swing.JScrollPane expertMechanicsPlane;
+    private javax.swing.JTextArea guaranteesLabel;
+    private javax.swing.JScrollPane guaranteesPlane;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel main;
+    private javax.swing.JTextArea marketYearsLabel;
+    private javax.swing.JScrollPane marketYearsPlane;
+    private javax.swing.JPanel newRecords;
+    private javax.swing.JPanel partsDB;
+    private javax.swing.JPanel partsOrder;
+    private javax.swing.JLabel tonAuto;
     // End of variables declaration//GEN-END:variables
 }
