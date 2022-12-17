@@ -27,10 +27,6 @@ public class AdminJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        attendance = new javax.swing.JPanel();
-        partsOrder = new javax.swing.JPanel();
-        partsDB = new javax.swing.JPanel();
-        newRecords = new javax.swing.JPanel();
         main = new javax.swing.JPanel();
         tonAuto = new javax.swing.JLabel();
         expertMechanicsPlane = new javax.swing.JScrollPane();
@@ -39,60 +35,12 @@ public class AdminJFrame extends javax.swing.JFrame {
         marketYearsLabel = new javax.swing.JTextArea();
         guaranteesPlane = new javax.swing.JScrollPane();
         guaranteesLabel = new javax.swing.JTextArea();
+        attendance = new javax.swing.JPanel();
+        partsOrder = new javax.swing.JPanel();
+        partsDB = new javax.swing.JPanel();
+        newRecords = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout attendanceLayout = new javax.swing.GroupLayout(attendance);
-        attendance.setLayout(attendanceLayout);
-        attendanceLayout.setHorizontalGroup(
-            attendanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
-        );
-        attendanceLayout.setVerticalGroup(
-            attendanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Посещаемость", attendance);
-
-        javax.swing.GroupLayout partsOrderLayout = new javax.swing.GroupLayout(partsOrder);
-        partsOrder.setLayout(partsOrderLayout);
-        partsOrderLayout.setHorizontalGroup(
-            partsOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
-        );
-        partsOrderLayout.setVerticalGroup(
-            partsOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Заказ деталей", partsOrder);
-
-        javax.swing.GroupLayout partsDBLayout = new javax.swing.GroupLayout(partsDB);
-        partsDB.setLayout(partsDBLayout);
-        partsDBLayout.setHorizontalGroup(
-            partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
-        );
-        partsDBLayout.setVerticalGroup(
-            partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Склад деталей", partsDB);
-
-        javax.swing.GroupLayout newRecordsLayout = new javax.swing.GroupLayout(newRecords);
-        newRecords.setLayout(newRecordsLayout);
-        newRecordsLayout.setHorizontalGroup(
-            newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
-        );
-        newRecordsLayout.setVerticalGroup(
-            newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Новые записи", newRecords);
 
         tonAuto.setFont(new java.awt.Font("Tw Cen MT", 0, 36)); // NOI18N
         tonAuto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -150,6 +98,58 @@ public class AdminJFrame extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Главная", main);
+
+        javax.swing.GroupLayout attendanceLayout = new javax.swing.GroupLayout(attendance);
+        attendance.setLayout(attendanceLayout);
+        attendanceLayout.setHorizontalGroup(
+            attendanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 900, Short.MAX_VALUE)
+        );
+        attendanceLayout.setVerticalGroup(
+            attendanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 469, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Посещаемость", attendance);
+
+        javax.swing.GroupLayout partsOrderLayout = new javax.swing.GroupLayout(partsOrder);
+        partsOrder.setLayout(partsOrderLayout);
+        partsOrderLayout.setHorizontalGroup(
+            partsOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 900, Short.MAX_VALUE)
+        );
+        partsOrderLayout.setVerticalGroup(
+            partsOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 469, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Заказ деталей", partsOrder);
+
+        javax.swing.GroupLayout partsDBLayout = new javax.swing.GroupLayout(partsDB);
+        partsDB.setLayout(partsDBLayout);
+        partsDBLayout.setHorizontalGroup(
+            partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 900, Short.MAX_VALUE)
+        );
+        partsDBLayout.setVerticalGroup(
+            partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 469, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Склад деталей", partsDB);
+
+        javax.swing.GroupLayout newRecordsLayout = new javax.swing.GroupLayout(newRecords);
+        newRecords.setLayout(newRecordsLayout);
+        newRecordsLayout.setHorizontalGroup(
+            newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 900, Short.MAX_VALUE)
+        );
+        newRecordsLayout.setVerticalGroup(
+            newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 469, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Новые записи", newRecords);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
