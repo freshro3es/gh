@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/SQLTemplate.sql to edit this template
  */
 
-DROP TABLE IF EXISTS mechanic, order, order_part, order_work, part, part_request, work, work_type;
+DROP TABLE IF EXISTS mechanic, order, order_part, order_work, part, part_request, work, work_type, user;
 
 CREATE TABLE IF NOT EXISTS mechanic
 (
@@ -77,8 +77,17 @@ CREATE TABLE IF NOT EXISTS work_type
     work_type_name character varying(50),
     CONSTRAINT work_type_pkey PRIMARY KEY (work_type_id),
     CONSTRAINT work_type_work_type_name_key UNIQUE (work_type_name)
-)
+);
 
+CREATE TABLE IF NOT EXISTS user
+(
+    email character varying(50) COLLATE NOT NULL,
+    password character varying(50) COLLATE NOT NULL,
+    name character varying(50) COLLATE NOT NULL,
+    lastname character varying(50) NOT NULL,
+    role character varying(15) NOT NULL,
+    CONSTRAINT user_pkey PRIMARY KEY (email)
+);
 
 /**
  * Author:  Игорь
