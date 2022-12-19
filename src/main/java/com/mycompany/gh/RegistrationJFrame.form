@@ -54,7 +54,10 @@
                               <Component id="message" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                  <Component id="registrationButton" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="loginURLLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="registrationButton" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -64,14 +67,11 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="registrationFormLabel" min="-2" pref="188" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="registrationLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="passwordField" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="logInField" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="passwordLabel" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="loginLabel" alignment="0" min="-2" pref="188" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="passwordField" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="logInField" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="passwordLabel" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="loginLabel" alignment="0" min="-2" pref="188" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
@@ -81,7 +81,7 @@
                                   <Component id="nameLabel" alignment="0" min="-2" pref="188" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="nameField1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lastnameField" alignment="0" max="32767" attributes="0"/>
                                   <Component id="lastnameLabel" alignment="0" min="-2" pref="188" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -103,7 +103,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lastnameLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="nameField1" min="-2" max="-2" attributes="0"/>
+                  <Component id="lastnameField" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="loginLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -116,7 +116,7 @@
                       <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="registrationLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="loginURLLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="registrationButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -147,12 +147,12 @@
             <Property name="text" type="java.lang.String" value="&#x41b;&#x43e;&#x433;&#x438;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="registrationLabel">
+        <Component class="javax.swing.JLabel" name="loginURLLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="10" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x417;&#x430;&#x440;&#x435;&#x433;&#x438;&#x441;&#x442;&#x440;&#x438;&#x440;&#x43e;&#x432;&#x430;&#x442;&#x44c;&#x441;&#x44f;"/>
+            <Property name="text" type="java.lang.String" value="&#x412;&#x43e;&#x439;&#x442;&#x438;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="passwordField">
@@ -182,7 +182,7 @@
             <Property name="text" type="java.lang.String" value="&#x418;&#x43c;&#x44f;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="nameField1">
+        <Component class="javax.swing.JTextField" name="lastnameField">
         </Component>
         <Component class="javax.swing.JLabel" name="lastnameLabel">
           <Properties>

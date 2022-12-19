@@ -121,15 +121,19 @@ public class LogInJFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (evt.getSource()==jButton1) {
-            String loginText = logInField.getText();
-            String pwdText = new String(passwordField.getPassword());
+            String email = logInField.getText();
+            String pswd = new String(passwordField.getPassword());
             
-            if (loginText.equalsIgnoreCase("kely") && pwdText.equalsIgnoreCase("pass")) {
-                message.setText("You succesfully logged in!");
+            UserAdd useradd = new UserAdd();
+            String result = useradd.find(email, pswd);
+            
+            System.out.println(result);
+            if (result.equals("0")) {
+                message.setText("Вы успешно вошли!");
+            } else {
+                message.setText("Введены неверные данные!");
             }
-            else {
-                message.setText("Invalid login and password");
-            }
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

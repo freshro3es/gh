@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/SQLTemplate.sql to edit this template
  */
 
-DROP TABLE IF EXISTS mechanic, order, order_part, order_work, part, part_request, work, work_type, user;
+DROP TABLE IF EXISTS mechanic, "order", order_part, order_work, part, part_request, work, work_type, "user";
 
 CREATE TABLE IF NOT EXISTS mechanic
 (
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS mechanic
     CONSTRAINT mechanic_pkey PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS order
+CREATE TABLE IF NOT EXISTS "order"
 (
     order_id smallint NOT NULL,
     terms_of_work time without time zone,
@@ -79,13 +79,13 @@ CREATE TABLE IF NOT EXISTS work_type
     CONSTRAINT work_type_work_type_name_key UNIQUE (work_type_name)
 );
 
-CREATE TABLE IF NOT EXISTS user
+CREATE TABLE IF NOT EXISTS "user"
 (
-    email character varying(50) COLLATE NOT NULL,
-    password character varying(50) COLLATE NOT NULL,
-    name character varying(50) COLLATE NOT NULL,
-    lastname character varying(50) NOT NULL,
-    role character varying(15) NOT NULL,
+    email varchar(50) NOT NULL,
+    password varchar(50) NOT NULL,
+    name varchar(50) NOT NULL,
+    lastname varchar(50) NOT NULL,
+    role varchar(15) NOT NULL,
     CONSTRAINT user_pkey PRIMARY KEY (email)
 );
 

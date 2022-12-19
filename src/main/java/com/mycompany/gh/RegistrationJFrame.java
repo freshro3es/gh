@@ -4,6 +4,14 @@
  */
 package com.mycompany.gh;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Игорь
@@ -31,14 +39,14 @@ public class RegistrationJFrame extends javax.swing.JFrame {
         passwordLabel = new javax.swing.JLabel();
         logInField = new javax.swing.JTextField();
         loginLabel = new javax.swing.JLabel();
-        registrationLabel = new javax.swing.JLabel();
+        loginURLLabel = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
         registrationButton = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         message = new javax.swing.JLabel();
         nameField = new javax.swing.JTextField();
         nameLabel = new javax.swing.JLabel();
-        nameField1 = new javax.swing.JTextField();
+        lastnameField = new javax.swing.JTextField();
         lastnameLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,8 +58,8 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 
         loginLabel.setText("Логин");
 
-        registrationLabel.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        registrationLabel.setText("Зарегистрироваться");
+        loginURLLabel.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        loginURLLabel.setText("Войти");
 
         registrationButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         registrationButton.setText("Зарегистрироваться");
@@ -79,27 +87,27 @@ public class RegistrationJFrame extends javax.swing.JFrame {
                             .addComponent(message, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(registrationButton)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(loginURLLabel)
+                                    .addComponent(registrationButton))
                                 .addGap(29, 29, 29)))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(registrationFormLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(registrationLabel)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(passwordField)
-                                        .addComponent(logInField)
-                                        .addComponent(passwordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(passwordField)
+                                    .addComponent(logInField)
+                                    .addComponent(passwordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCheckBox1))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(nameField)
                                 .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(nameField1)
+                                .addComponent(lastnameField)
                                 .addComponent(lastnameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
@@ -115,7 +123,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lastnameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nameField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lastnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(loginLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -127,7 +135,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(registrationLabel)
+                .addComponent(loginURLLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(registrationButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -158,15 +166,21 @@ public class RegistrationJFrame extends javax.swing.JFrame {
     private void registrationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrationButtonActionPerformed
         // TODO add your handling code here:
         if (evt.getSource()==registrationButton) {
-            String loginText = logInField.getText();
-            String pwdText = new String(passwordField.getPassword());
+            String name = nameField.getText();
+            String lastname = lastnameField.getText();
+            String email = logInField.getText();
+            String pswd = new String(passwordField.getPassword());
+            
+            UserAdd useradd = new UserAdd();
+            useradd.add(name, lastname, email, pswd, "client");
+            message.setText("You succesfully registrated!");
 
-            if (loginText.equalsIgnoreCase("kely") && pwdText.equalsIgnoreCase("pass")) {
-                message.setText("You succesfully logged in!");
-            }
-            else {
-                message.setText("Invalid login and password");
-            }
+//            if (loginText.equalsIgnoreCase("kely") && pwdText.equalsIgnoreCase("pass")) {
+//                message.setText("You succesfully logged in!");
+//            }
+//            else {
+//                message.setText("Invalid login and password");
+//            }
         }
     }//GEN-LAST:event_registrationButtonActionPerformed
 
@@ -208,17 +222,17 @@ public class RegistrationJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField lastnameField;
     private javax.swing.JLabel lastnameLabel;
     private javax.swing.JTextField logInField;
     private javax.swing.JLabel loginLabel;
+    private javax.swing.JLabel loginURLLabel;
     private javax.swing.JLabel message;
     private javax.swing.JTextField nameField;
-    private javax.swing.JTextField nameField1;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JButton registrationButton;
     private javax.swing.JLabel registrationFormLabel;
-    private javax.swing.JLabel registrationLabel;
     // End of variables declaration//GEN-END:variables
 }
