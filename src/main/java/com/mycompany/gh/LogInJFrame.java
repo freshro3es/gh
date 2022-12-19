@@ -4,6 +4,8 @@
  */
 package com.mycompany.gh;
 
+import java.awt.Color;
+
 /**
  *
  * @author Игорь
@@ -34,7 +36,7 @@ public class LogInJFrame extends javax.swing.JFrame {
         registrationLabel = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        pswdCheck = new javax.swing.JCheckBox();
         message = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,6 +53,17 @@ public class LogInJFrame extends javax.swing.JFrame {
 
         registrationLabel.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         registrationLabel.setText("Зарегистрироваться");
+        registrationLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                registrationLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                registrationLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                registrationLabelMouseExited(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jButton1.setText("Войти");
@@ -60,7 +73,13 @@ public class LogInJFrame extends javax.swing.JFrame {
             }
         });
 
-        message.setText("jLabel1");
+        pswdCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pswdCheckActionPerformed(evt);
+            }
+        });
+
+        message.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -82,7 +101,7 @@ public class LogInJFrame extends javax.swing.JFrame {
                                 .addComponent(passwordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox1)))
+                        .addComponent(pswdCheck)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -103,7 +122,7 @@ public class LogInJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
+                    .addComponent(pswdCheck))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(registrationLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -121,12 +140,16 @@ public class LogInJFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (evt.getSource()==jButton1) {
+            
+            //получаю данные с введенных полей
             String email = logInField.getText();
             String pswd = new String(passwordField.getPassword());
             
+            //создаю новый экземпляр класса, работающего с таблицей "user", произвожу поиск аккаунта
             UserAdd useradd = new UserAdd();
             String result = useradd.find(email, pswd);
             
+            //обработка результата поиска аккаунта
             System.out.println(result);
             if (result.equals("0")) {
                 message.setText("Вы успешно вошли!");
@@ -134,8 +157,66 @@ public class LogInJFrame extends javax.swing.JFrame {
                 message.setText("Введены неверные данные!");
             }
             
+            //открытие соответствующего окна
+            switch(result) {
+                case "admin":
+                    // code block
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                        public void run() {
+                            new AdminJFrame().setVisible(true);
+                        }
+                    });
+                    this.dispose();
+                    break;
+                case "mechanic":
+                    // code block
+                    break;
+                case "client":
+                    // code block
+                    break;
+                default:
+                // code block
+}
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void registrationLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrationLabelMouseEntered
+        // TODO add your handling code here:
+        if (evt.getSource()==registrationLabel) {
+            registrationLabel.setForeground(Color.BLUE);
+        }
+    }//GEN-LAST:event_registrationLabelMouseEntered
+
+    private void registrationLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrationLabelMouseExited
+        // TODO add your handling code here:
+        if (evt.getSource()==registrationLabel) {
+            registrationLabel.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_registrationLabelMouseExited
+
+    private void registrationLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrationLabelMouseClicked
+        // TODO add your handling code here:
+        if (evt.getSource()==registrationLabel) {
+            //RegistrationJFrame frame = new RegistrationJFrame();
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new RegistrationJFrame().setVisible(true);
+                }
+            });
+            this.dispose();
+        }
+    }//GEN-LAST:event_registrationLabelMouseClicked
+
+    private void pswdCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswdCheckActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource()==pswdCheck) {
+            if (pswdCheck.isSelected()) {
+                passwordField.setEchoChar((char) 0);
+            } else {
+                passwordField.setEchoChar('*');
+            }
+        }
+    }//GEN-LAST:event_pswdCheckActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,7 +255,6 @@ public class LogInJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField logInField;
     private javax.swing.JLabel logInFormLabel;
@@ -182,6 +262,7 @@ public class LogInJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel message;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
+    private javax.swing.JCheckBox pswdCheck;
     private javax.swing.JLabel registrationLabel;
     // End of variables declaration//GEN-END:variables
 }

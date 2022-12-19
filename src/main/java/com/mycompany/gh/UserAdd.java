@@ -22,7 +22,7 @@ public class UserAdd {
      * @param pswd
      * @param role
      */
-    public void add(String name, String lastname, String email, String pswd, String role) {
+    public boolean add(String name, String lastname, String email, String pswd, String role) {
         
 
         String query = "INSERT INTO \"user\"(name, lastname, email, password, role) VALUES(?, ?, ?, ?, ?)";
@@ -39,7 +39,9 @@ public class UserAdd {
 
             Logger lgr = Logger.getLogger(UserAdd.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
+            return false;
         }
+        return true;
     }
     
     

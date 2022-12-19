@@ -89,6 +89,9 @@ CREATE TABLE IF NOT EXISTS "user"
     CONSTRAINT user_pkey PRIMARY KEY (email)
 );
 
+INSERT INTO "user" (email, password, name, lastname, role)
+VALUES ('1111', '1111', 'Ostap', 'Bender', 'admin');
+
 /**
  * Author:  Игорь
  * Created: 17 дек. 2022 г.
