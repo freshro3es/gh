@@ -1,5 +1,6 @@
-package com.mycompany.gh;
+package com.mycompany.gh.db;
 
+import com.mycompany.gh.db.UserDB;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -33,6 +34,27 @@ public class PartDB {
         return count;
     }
     
+    public void setData(String[] param) {
+        System.out.println("setData started...");
+        
+        String query = "INSERT INTO part (id, name, type, price, amount, order_id) VALUES  (DEFAULT, ?, ?, ?, ?, ?);";
+        
+        try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
+            PreparedStatement pst = con.prepareStatement(query)) {
+            System.out.println("connected to parts DB...");
+            pst.setString(1, param[0]);
+            pst.setString(2, param[1]);
+            pst.setInt(3, Integer.parseInt(param[2]));
+            pst.setInt(4, Integer.parseInt(param[3]));
+            pst.setInt(5, Integer.parseInt(param[4]));       
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(UserDB.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        System.out.println("setData ended...");
+    }
     
     public String[][] getData() throws SQLException {
         System.out.println("getData started...");

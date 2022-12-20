@@ -4,6 +4,7 @@
  */
 package com.mycompany.gh;
 
+import com.mycompany.gh.db.PartDB;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,7 +46,8 @@ public class AdminJFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         partsTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        updateButton = new javax.swing.JButton();
+        addPartButton = new javax.swing.JButton();
         newRecords = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,6 +60,7 @@ public class AdminJFrame extends javax.swing.JFrame {
         tonAuto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tonAuto.setText("TonAuto");
         tonAuto.setBorder(new javax.swing.border.MatteBorder(null));
+        tonAuto.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         expertMechanicsLabel.setEditable(false);
         expertMechanicsLabel.setColumns(20);
@@ -173,10 +176,17 @@ public class AdminJFrame extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Склад деталей");
 
-        jButton1.setText("Добавить деталь");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        updateButton.setText("Обновить");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                updateButtonActionPerformed(evt);
+            }
+        });
+
+        addPartButton.setText("Добавить деталь");
+        addPartButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addPartButtonActionPerformed(evt);
             }
         });
 
@@ -184,18 +194,20 @@ public class AdminJFrame extends javax.swing.JFrame {
         partsDB.setLayout(partsDBLayout);
         partsDBLayout.setHorizontalGroup(
             partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, partsDBLayout.createSequentialGroup()
+            .addGroup(partsDBLayout.createSequentialGroup()
                 .addGap(64, 64, 64)
                 .addGroup(partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(partsDBLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addGap(78, 78, 78))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, partsDBLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90))
+                        .addGroup(partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(78, 78, 78))
+                    .addGroup(partsDBLayout.createSequentialGroup()
+                        .addGap(182, 182, 182)
+                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(addPartButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         partsDBLayout.setVerticalGroup(
             partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,7 +217,9 @@ public class AdminJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addPartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
         );
 
@@ -239,11 +253,6 @@ public class AdminJFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void partsTableComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_partsTableComponentShown
         // TODO add your handling code here:
         if (evt.getSource()==partsDB) {
@@ -264,6 +273,37 @@ public class AdminJFrame extends javax.swing.JFrame {
             partsTable.setModel(tableModel);
         }
     }//GEN-LAST:event_partsTableComponentShown
+
+    private void addPartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartButtonActionPerformed
+        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new AddPartJFrame().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_addPartButtonActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource()==updateButton) {
+            PartDB parts = new PartDB();
+            Object[][] array = null;
+            System.out.println("getting data...");
+            try {
+                array = parts.getData();
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("got data...");
+            DefaultTableModel tableModel = new DefaultTableModel();
+            Object[] columnsHeader = new String[] {"Название", "Тип", "Количество", "Цена", "Заказ"};
+            tableModel.setColumnIdentifiers(columnsHeader);
+            for (int i = 0; i < array.length; i++)
+            tableModel.addRow(array[i]);
+            partsTable.setModel(tableModel);
+        }
+    }//GEN-LAST:event_updateButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,10 +339,10 @@ public class AdminJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addPartButton;
     private javax.swing.JPanel attendance;
     private javax.swing.JTextArea expertMechanicsLabel;
     private javax.swing.JTextArea guaranteesLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel main;
@@ -312,5 +352,6 @@ public class AdminJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel partsOrder;
     private javax.swing.JTable partsTable;
     private javax.swing.JLabel tonAuto;
+    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }

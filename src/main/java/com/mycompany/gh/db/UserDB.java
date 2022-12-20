@@ -1,4 +1,4 @@
-package com.mycompany.gh;
+package com.mycompany.gh.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

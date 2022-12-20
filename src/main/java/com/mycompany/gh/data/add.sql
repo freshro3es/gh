@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS part
     name character varying(50),
     type character varying(50),
     price int,
-    amount smallint,
-    order_id smallint,
+    amount int,
+    order_id int,
     CONSTRAINT part_pkey PRIMARY KEY (id)
 );
 

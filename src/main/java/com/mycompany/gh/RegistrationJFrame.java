@@ -4,6 +4,7 @@
  */
 package com.mycompany.gh;
 
+import com.mycompany.gh.db.UserDB;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
