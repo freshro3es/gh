@@ -17,6 +17,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Игорь
  */
 public class AdminJFrame extends javax.swing.JFrame {
+    
+    DefaultTableModel tableModel;
 
     /**
      * Creates new form mainJFrame
@@ -42,12 +44,19 @@ public class AdminJFrame extends javax.swing.JFrame {
         guaranteesLabel = new javax.swing.JTextArea();
         attendance = new javax.swing.JPanel();
         partsOrder = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        partsOrderTable = new javax.swing.JTable();
+        deleteOrderButton = new javax.swing.JButton();
+        partOrderLabel = new javax.swing.JLabel();
+        updateOrderButton = new javax.swing.JButton();
+        addPartOrderButton = new javax.swing.JButton();
         partsDB = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         partsTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         updateButton = new javax.swing.JButton();
         addPartButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
         newRecords = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -129,15 +138,95 @@ public class AdminJFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Посещаемость", attendance);
 
+        partsOrderTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Название", "Тип", "Цена", "Количество", "Заказ"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        partsOrderTable.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                partsOrderTableComponentShown(evt);
+            }
+        });
+        jScrollPane2.setViewportView(partsOrderTable);
+
+        deleteOrderButton.setText("Удалить деталь");
+        deleteOrderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteOrderButtonActionPerformed(evt);
+            }
+        });
+
+        partOrderLabel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        partOrderLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        partOrderLabel.setText("Заказ деталей");
+
+        updateOrderButton.setText("Обновить");
+        updateOrderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateOrderButtonActionPerformed(evt);
+            }
+        });
+
+        addPartOrderButton.setText("Добавить деталь");
+        addPartOrderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addPartOrderButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout partsOrderLayout = new javax.swing.GroupLayout(partsOrder);
         partsOrder.setLayout(partsOrderLayout);
         partsOrderLayout.setHorizontalGroup(
             partsOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 792, Short.MAX_VALUE)
+            .addGroup(partsOrderLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addGroup(partsOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(partsOrderLayout.createSequentialGroup()
+                        .addGroup(partsOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                            .addComponent(partOrderLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(78, 78, 78))
+                    .addGroup(partsOrderLayout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(updateOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addPartOrderButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         partsOrderLayout.setVerticalGroup(
             partsOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 512, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, partsOrderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(partOrderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(partsOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addPartOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
         );
 
         jTabbedPane1.addTab("Заказ деталей", partsOrder);
@@ -147,14 +236,14 @@ public class AdminJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Название", "Тип", "Количество", "Цена", "Заказ"
+                "Название", "Тип", "Цена", "Количество", "Заказ"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, true, true, true
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -190,6 +279,13 @@ public class AdminJFrame extends javax.swing.JFrame {
             }
         });
 
+        deleteButton.setText("Удалить деталь");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout partsDBLayout = new javax.swing.GroupLayout(partsDB);
         partsDB.setLayout(partsDBLayout);
         partsDBLayout.setHorizontalGroup(
@@ -203,10 +299,12 @@ public class AdminJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(78, 78, 78))
                     .addGroup(partsDBLayout.createSequentialGroup()
-                        .addGap(182, 182, 182)
+                        .addGap(84, 84, 84)
                         .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(addPartButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         partsDBLayout.setVerticalGroup(
@@ -217,9 +315,10 @@ public class AdminJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addPartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addPartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
         );
 
@@ -296,14 +395,46 @@ public class AdminJFrame extends javax.swing.JFrame {
                 Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
             System.out.println("got data...");
-            DefaultTableModel tableModel = new DefaultTableModel();
-            Object[] columnsHeader = new String[] {"Название", "Тип", "Количество", "Цена", "Заказ"};
+            tableModel = new DefaultTableModel();
+            Object[] columnsHeader = new String[] {"Название", "Тип", "Цена", "Количество", "Заказ"};
             tableModel.setColumnIdentifiers(columnsHeader);
             for (int i = 0; i < array.length; i++)
             tableModel.addRow(array[i]);
             partsTable.setModel(tableModel);
         }
     }//GEN-LAST:event_updateButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource()==deleteButton) {
+            int idx = partsTable.getSelectedRow();
+            String[] param = new String[5]; 
+            for (int i = 0; i < 5; i++) {
+                param[i] = (String) partsTable.getValueAt(idx, i);
+            }
+            tableModel.removeRow(idx);
+            PartDB parts = new PartDB();
+            parts.deleteData(param);
+            System.out.println("return to main form");
+            
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void partsOrderTableComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_partsOrderTableComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_partsOrderTableComponentShown
+
+    private void deleteOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteOrderButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteOrderButtonActionPerformed
+
+    private void updateOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateOrderButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateOrderButtonActionPerformed
+
+    private void addPartOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartOrderButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addPartOrderButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -340,18 +471,25 @@ public class AdminJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPartButton;
+    private javax.swing.JButton addPartOrderButton;
     private javax.swing.JPanel attendance;
+    private javax.swing.JButton deleteButton;
+    private javax.swing.JButton deleteOrderButton;
     private javax.swing.JTextArea expertMechanicsLabel;
     private javax.swing.JTextArea guaranteesLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel main;
     private javax.swing.JTextArea marketYearsLabel;
     private javax.swing.JPanel newRecords;
+    private javax.swing.JLabel partOrderLabel;
     private javax.swing.JPanel partsDB;
     private javax.swing.JPanel partsOrder;
+    private javax.swing.JTable partsOrderTable;
     private javax.swing.JTable partsTable;
     private javax.swing.JLabel tonAuto;
     private javax.swing.JButton updateButton;
+    private javax.swing.JButton updateOrderButton;
     // End of variables declaration//GEN-END:variables
 }

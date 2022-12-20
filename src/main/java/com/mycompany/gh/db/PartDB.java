@@ -56,6 +56,27 @@ public class PartDB {
         System.out.println("setData ended...");
     }
     
+    public void deleteData(String[] param) {
+        System.out.println("deleteData started...");
+        
+        String query = "DELETE FROM part WHERE name=? and order_id=?";
+        
+        try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
+            PreparedStatement pst = con.prepareStatement(query)) {
+            System.out.println("connected to parts DB...");
+            pst.setString(1, param[0]);
+            System.out.println(param[0]);
+            pst.setInt(2, Integer.parseInt(param[4]));
+            System.out.println(param[4]);
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(UserDB.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        System.out.println("deleteData ended...");
+    }
+    
     public String[][] getData() throws SQLException {
         System.out.println("getData started...");
         int n = this.count();

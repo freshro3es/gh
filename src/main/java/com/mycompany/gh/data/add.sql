@@ -51,9 +51,9 @@ CREATE TABLE IF NOT EXISTS part
 
 CREATE TABLE IF NOT EXISTS part_request
 (
-    order_id smallint,
-    part_id smallint,
-    number_of_details smallint
+    part_name character varying(50),
+    number_of_details int,
+    order_id int
 );
 
 CREATE TABLE IF NOT EXISTS parts_request

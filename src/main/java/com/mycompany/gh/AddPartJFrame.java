@@ -47,9 +47,9 @@ public class AddPartJFrame extends javax.swing.JFrame {
 
         typeLabel.setText("Тип");
 
-        amountLabel.setText("Количество");
+        amountLabel.setText("Цена");
 
-        priceLabel.setText("Стоимость");
+        priceLabel.setText("Количество");
 
         orderLabel.setText("Заказ");
 
@@ -131,12 +131,12 @@ public class AddPartJFrame extends javax.swing.JFrame {
             //получаю данные с введенных полей
             String name = nameField.getText();
             String type = typeField.getText();
-            String amount = amountField.getText();
-            String price = priceField.getText();
+            String price = amountField.getText();
+            String amount = priceField.getText();
             String order = orderField.getText();
             //создаю новый экземпляр класса, работающего с таблицей "user", произвожу поиск аккаунта
             PartDB partadd = new PartDB();
-            partadd.setData(new String[]  {name, type, amount, price, order});
+            partadd.setData(new String[]  {name, type, price, amount, order});
             //обработка результата поиска аккаунта
             this.dispose();
         }
