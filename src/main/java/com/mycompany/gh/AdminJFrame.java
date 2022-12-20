@@ -249,17 +249,19 @@ public class AdminJFrame extends javax.swing.JFrame {
         if (evt.getSource()==partsDB) {
             PartDB parts = new PartDB();
             Object[][] array = null;
+            System.out.println("getting data...");
             try {
                 array = parts.getData();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
+            System.out.println("got data...");
             DefaultTableModel tableModel = new DefaultTableModel();
             Object[] columnsHeader = new String[] {"Название", "Тип", "Количество", "Цена", "Заказ"};
             tableModel.setColumnIdentifiers(columnsHeader);
             for (int i = 0; i < array.length; i++)
                 tableModel.addRow(array[i]);
-            partsTable = new javax.swing.JTable(tableModel);
+            partsTable.setModel(tableModel);
         }
     }//GEN-LAST:event_partsTableComponentShown
 

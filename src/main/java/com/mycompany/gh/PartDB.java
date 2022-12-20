@@ -16,6 +16,7 @@ public class PartDB {
 
     
     public int count() throws SQLException {
+        System.out.println("count connected...");
         int count = -1;
         try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
                 
@@ -28,15 +29,17 @@ public class PartDB {
             Logger lgr = Logger.getLogger(UserDB.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
+        System.out.println("cout ended...");
         return count;
     }
     
     
     public String[][] getData() throws SQLException {
+        System.out.println("getData started...");
         int n = this.count();
         String[][] param = new String[n][5];
             
-        try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);    
+        try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
             PreparedStatement pst = con.prepareStatement("SELECT * FROM part");    
             ResultSet rs = pst.executeQuery()) {
             int i = 0;
@@ -48,11 +51,13 @@ public class PartDB {
                 param[i][4] = Integer.toString( rs.getInt(6));       
                 i+=1;         
             }
+            System.out.println("connected to parts DB...");
         } catch (SQLException ex) {
 
             Logger lgr = Logger.getLogger(UserDB.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
+        System.out.println("getData ended...");
         return param;
     }
 }
