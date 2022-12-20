@@ -4,6 +4,13 @@
  */
 package com.mycompany.gh;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JScrollPane;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Игорь
@@ -26,47 +33,54 @@ public class AdminJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        javax.swing.JTabbedPane jTabbedPane1 = new javax.swing.JTabbedPane();
         main = new javax.swing.JPanel();
         tonAuto = new javax.swing.JLabel();
-        expertMechanicsPlane = new javax.swing.JScrollPane();
         expertMechanicsLabel = new javax.swing.JTextArea();
-        marketYearsPlane = new javax.swing.JScrollPane();
         marketYearsLabel = new javax.swing.JTextArea();
-        guaranteesPlane = new javax.swing.JScrollPane();
         guaranteesLabel = new javax.swing.JTextArea();
         attendance = new javax.swing.JPanel();
         partsOrder = new javax.swing.JPanel();
         partsDB = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        partsTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         newRecords = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("ТонАвто ИС");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
         tonAuto.setFont(new java.awt.Font("Tw Cen MT", 0, 36)); // NOI18N
         tonAuto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tonAuto.setText("TonAuto");
         tonAuto.setBorder(new javax.swing.border.MatteBorder(null));
 
+        expertMechanicsLabel.setEditable(false);
         expertMechanicsLabel.setColumns(20);
         expertMechanicsLabel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         expertMechanicsLabel.setRows(5);
         expertMechanicsLabel.setText("ОПЫТНЫЕ МАСТЕРА\n\nРегулярное повышение квалификации, \nобучение и современное оборудование \nпозволяют нам обеспечить высокое \nкачество исполнения любых работ по \nремонту автомобиля.");
         expertMechanicsLabel.setMargin(new java.awt.Insets(3, 10, 3, 10));
-        expertMechanicsPlane.setViewportView(expertMechanicsLabel);
 
+        marketYearsLabel.setEditable(false);
         marketYearsLabel.setColumns(20);
         marketYearsLabel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         marketYearsLabel.setRows(5);
-        marketYearsLabel.setText("24 ГОДА НА РЫНКЕ\n\nЗа такой срок мы накопили огромный опыт \nв ремонте и обслуживании иномарок, \nавтомобилей отечественного производства \nи микроавтобусов.");
+        marketYearsLabel.setText("24 ГОДА НА РЫНКЕ\n\nЗа такой срок мы накопили огромный\nопыт в ремонте и обслуживании ино-\nмарок, автомобилей отечественного \nпроизводства и микроавтобусов.");
+        marketYearsLabel.setAutoscrolls(false);
         marketYearsLabel.setMargin(new java.awt.Insets(3, 10, 3, 10));
-        marketYearsPlane.setViewportView(marketYearsLabel);
 
+        guaranteesLabel.setEditable(false);
         guaranteesLabel.setColumns(20);
         guaranteesLabel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         guaranteesLabel.setRows(5);
         guaranteesLabel.setText("ГАРАНТИЯ НА РЕМОНТ\nИ ЗАПЧАСТИ\n\nНа выполненные работы и запчасти мы \nпредоставляем гарантию до 1 года.");
+        guaranteesLabel.setAutoscrolls(false);
         guaranteesLabel.setMargin(new java.awt.Insets(3, 10, 3, 10));
-        guaranteesPlane.setViewportView(guaranteesLabel);
 
         javax.swing.GroupLayout mainLayout = new javax.swing.GroupLayout(main);
         main.setLayout(mainLayout);
@@ -74,27 +88,27 @@ public class AdminJFrame extends javax.swing.JFrame {
             mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(mainLayout.createSequentialGroup()
-                        .addComponent(marketYearsPlane, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(marketYearsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(expertMechanicsPlane, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(guaranteesPlane, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tonAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(72, Short.MAX_VALUE))
+                        .addComponent(guaranteesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tonAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(expertMechanicsLabel))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
         mainLayout.setVerticalGroup(
             mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(tonAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(expertMechanicsPlane)
-                    .addComponent(marketYearsPlane)
-                    .addComponent(guaranteesPlane, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(marketYearsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(guaranteesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(expertMechanicsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(114, 114, 114))
         );
 
         jTabbedPane1.addTab("Главная", main);
@@ -103,11 +117,11 @@ public class AdminJFrame extends javax.swing.JFrame {
         attendance.setLayout(attendanceLayout);
         attendanceLayout.setHorizontalGroup(
             attendanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGap(0, 792, Short.MAX_VALUE)
         );
         attendanceLayout.setVerticalGroup(
             attendanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGap(0, 512, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Посещаемость", attendance);
@@ -116,24 +130,83 @@ public class AdminJFrame extends javax.swing.JFrame {
         partsOrder.setLayout(partsOrderLayout);
         partsOrderLayout.setHorizontalGroup(
             partsOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGap(0, 792, Short.MAX_VALUE)
         );
         partsOrderLayout.setVerticalGroup(
             partsOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGap(0, 512, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Заказ деталей", partsOrder);
+
+        partsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Название", "Тип", "Количество", "Цена", "Заказ"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, true, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        partsTable.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                partsTableComponentShown(evt);
+            }
+        });
+        jScrollPane1.setViewportView(partsTable);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Склад деталей");
+
+        jButton1.setText("Добавить деталь");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout partsDBLayout = new javax.swing.GroupLayout(partsDB);
         partsDB.setLayout(partsDBLayout);
         partsDBLayout.setHorizontalGroup(
             partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, partsDBLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addGroup(partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(partsDBLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addGap(78, 78, 78))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, partsDBLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90))
         );
         partsDBLayout.setVerticalGroup(
             partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, partsDBLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
 
         jTabbedPane1.addTab("Склад деталей", partsDB);
@@ -142,11 +215,11 @@ public class AdminJFrame extends javax.swing.JFrame {
         newRecords.setLayout(newRecordsLayout);
         newRecordsLayout.setHorizontalGroup(
             newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGap(0, 792, Short.MAX_VALUE)
         );
         newRecordsLayout.setVerticalGroup(
             newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGap(0, 512, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Новые записи", newRecords);
@@ -155,7 +228,7 @@ public class AdminJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +236,32 @@ public class AdminJFrame extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void partsTableComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_partsTableComponentShown
+        // TODO add your handling code here:
+        if (evt.getSource()==partsDB) {
+            PartDB parts = new PartDB();
+            Object[][] array = null;
+            try {
+                array = parts.getData();
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            DefaultTableModel tableModel = new DefaultTableModel();
+            Object[] columnsHeader = new String[] {"Название", "Тип", "Количество", "Цена", "Заказ"};
+            tableModel.setColumnIdentifiers(columnsHeader);
+            for (int i = 0; i < array.length; i++)
+                tableModel.addRow(array[i]);
+            partsTable = new javax.swing.JTable(tableModel);
+        }
+    }//GEN-LAST:event_partsTableComponentShown
 
     /**
      * @param args the command line arguments
@@ -181,15 +279,12 @@ public class AdminJFrame extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AdminJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        
         //</editor-fold>
         //</editor-fold>
 
@@ -204,16 +299,16 @@ public class AdminJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel attendance;
     private javax.swing.JTextArea expertMechanicsLabel;
-    private javax.swing.JScrollPane expertMechanicsPlane;
     private javax.swing.JTextArea guaranteesLabel;
-    private javax.swing.JScrollPane guaranteesPlane;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel main;
     private javax.swing.JTextArea marketYearsLabel;
-    private javax.swing.JScrollPane marketYearsPlane;
     private javax.swing.JPanel newRecords;
     private javax.swing.JPanel partsDB;
     private javax.swing.JPanel partsOrder;
+    private javax.swing.JTable partsTable;
     private javax.swing.JLabel tonAuto;
     // End of variables declaration//GEN-END:variables
 }

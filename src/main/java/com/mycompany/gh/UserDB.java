@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserAdd {
+public class UserDB {
     
     private String url = "jdbc:postgresql://localhost:4572/hg";
     private String user = "postgres";
@@ -37,7 +37,7 @@ public class UserAdd {
             pst.executeUpdate();
         } catch (SQLException ex) {
 
-            Logger lgr = Logger.getLogger(UserAdd.class.getName());
+            Logger lgr = Logger.getLogger(UserDB.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
             return false;
         }
@@ -58,7 +58,7 @@ public class UserAdd {
             }
         } catch (SQLException ex) {
 
-            Logger lgr = Logger.getLogger(UserAdd.class.getName());
+            Logger lgr = Logger.getLogger(UserDB.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
         return "0";
@@ -83,7 +83,7 @@ public class UserAdd {
             }
         } catch (SQLException ex) {
 
-            Logger lgr = Logger.getLogger(UserAdd.class.getName());
+            Logger lgr = Logger.getLogger(UserDB.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }

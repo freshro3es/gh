@@ -135,6 +135,7 @@ public class LogInJFrame extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new java.awt.GridBagConstraints());
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -146,15 +147,15 @@ public class LogInJFrame extends javax.swing.JFrame {
             String pswd = new String(passwordField.getPassword());
             
             //создаю новый экземпляр класса, работающего с таблицей "user", произвожу поиск аккаунта
-            UserAdd useradd = new UserAdd();
+            UserDB useradd = new UserDB();
             String result = useradd.find(email, pswd);
             
             //обработка результата поиска аккаунта
             System.out.println(result);
             if (result.equals("0")) {
-                message.setText("Вы успешно вошли!");
-            } else {
                 message.setText("Введены неверные данные!");
+            } else {
+                message.setText("Вы успешно вошли!");
             }
             
             //открытие соответствующего окна
@@ -162,6 +163,7 @@ public class LogInJFrame extends javax.swing.JFrame {
                 case "admin":
                     // code block
                     java.awt.EventQueue.invokeLater(new Runnable() {
+                        @Override
                         public void run() {
                             new AdminJFrame().setVisible(true);
                         }

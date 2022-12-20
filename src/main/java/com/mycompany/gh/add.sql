@@ -40,10 +40,12 @@ CREATE TABLE IF NOT EXISTS order_work
 
 CREATE TABLE IF NOT EXISTS part
 (
-    id smallint NOT NULL,
-    type character varying(50),
-    price smallint,
+    id serial NOT NULL,
     name character varying(50),
+    type character varying(50),
+    price int,
+    amount smallint,
+    order_id smallint,
     CONSTRAINT part_pkey PRIMARY KEY (id)
 );
 
@@ -92,6 +94,11 @@ CREATE TABLE IF NOT EXISTS "user"
 INSERT INTO "user" (email, password, name, lastname, role)
 VALUES ('1111', '1111', 'Ostap', 'Bender', 'admin');
 
+
+INSERT INTO part (id, name, type, price, amount, order_id)
+VALUES  (DEFAULT, 'Сцепление', 'Трансмиссия', 10000, 1, 1234),
+        (DEFAULT, 'Масло', 'Трансмиссия', 2000, 2, 4321),
+        (DEFAULT, 'МКПП', 'Трансмиссия', 150000, 1, 1234);
 /**
  * Author:  Игорь
  * Created: 17 дек. 2022 г.
