@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PartDB {
+public class PartOrderDB {
     private String url = "jdbc:postgresql://localhost:4572/hg";
     private String user = "postgres";
     private String password = "admin";
@@ -20,7 +20,7 @@ public class PartDB {
         int count = -1;
         try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
                 
-            PreparedStatement stmt = con.prepareStatement("select count(*) from part");
+            PreparedStatement stmt = con.prepareStatement("select count(*) from part_order");
             ResultSet res = stmt.executeQuery()) {
                 res.next();
                 count = res.getInt(1);
@@ -36,7 +36,7 @@ public class PartDB {
     public void setData(String[] param) {
         System.out.println("setData started...");
         
-        String query = "INSERT INTO part (id, name, type, price, amount, order_id) VALUES  (DEFAULT, ?, ?, ?, ?, ?);";
+        String query = "INSERT INTO part_order (part_name, part_type, price, amount, order_id) VALUES  (?, ?, ?, ?, ?);";
         
         try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
             PreparedStatement pst = con.prepareStatement(query)) {
@@ -58,7 +58,7 @@ public class PartDB {
     public void deleteData(String[] param) {
         System.out.println("deleteData started...");
         
-        String query = "DELETE FROM part WHERE name=? and order_id=?";
+        String query = "DELETE FROM part_order WHERE part_name=? and order_id=?";
         
         try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
             PreparedStatement pst = con.prepareStatement(query)) {
@@ -82,18 +82,18 @@ public class PartDB {
         String[][] param = new String[n][5];
             
         try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM part");    
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM part_order");    
             ResultSet rs = pst.executeQuery()) {
             int i = 0;
             while (rs.next()) {
-                param[i][0] = rs.getString(2);
-                param[i][1] = rs.getString(3);
-                param[i][2] = Integer.toString(rs.getInt(4));
-                param[i][3] = Integer.toString(rs.getInt(5));
-                param[i][4] = Integer.toString( rs.getInt(6));       
+                param[i][0] = rs.getString(1);
+                param[i][1] = rs.getString(2);
+                param[i][2] = Integer.toString(rs.getInt(3));
+                param[i][3] = Integer.toString(rs.getInt(4));
+                param[i][4] = Integer.toString( rs.getInt(5));       
                 i+=1;         
             }
-            System.out.println("connected to parts DB...");
+            System.out.println("connected to part_order DB...");
         } catch (SQLException ex) {
 
             Logger lgr = Logger.getLogger(UserDB.class.getName());

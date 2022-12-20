@@ -5,6 +5,7 @@
 package com.mycompany.gh;
 
 import com.mycompany.gh.db.PartDB;
+import com.mycompany.gh.db.PartOrderDB;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +19,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AdminJFrame extends javax.swing.JFrame {
     
-    DefaultTableModel tableModel;
+    DefaultTableModel partTableModel;
+    DefaultTableModel partOrderTableModel;
 
     /**
      * Creates new form mainJFrame
@@ -354,23 +356,6 @@ public class AdminJFrame extends javax.swing.JFrame {
 
     private void partsTableComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_partsTableComponentShown
         // TODO add your handling code here:
-        if (evt.getSource()==partsDB) {
-            PartDB parts = new PartDB();
-            Object[][] array = null;
-            System.out.println("getting data...");
-            try {
-                array = parts.getData();
-            } catch (SQLException ex) {
-                Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            System.out.println("got data...");
-            DefaultTableModel tableModel = new DefaultTableModel();
-            Object[] columnsHeader = new String[] {"Название", "Тип", "Количество", "Цена", "Заказ"};
-            tableModel.setColumnIdentifiers(columnsHeader);
-            for (int i = 0; i < array.length; i++)
-                tableModel.addRow(array[i]);
-            partsTable.setModel(tableModel);
-        }
     }//GEN-LAST:event_partsTableComponentShown
 
     private void addPartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartButtonActionPerformed
@@ -395,12 +380,12 @@ public class AdminJFrame extends javax.swing.JFrame {
                 Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
             System.out.println("got data...");
-            tableModel = new DefaultTableModel();
+            partTableModel = new DefaultTableModel();
             Object[] columnsHeader = new String[] {"Название", "Тип", "Цена", "Количество", "Заказ"};
-            tableModel.setColumnIdentifiers(columnsHeader);
+            partTableModel.setColumnIdentifiers(columnsHeader);
             for (int i = 0; i < array.length; i++)
-            tableModel.addRow(array[i]);
-            partsTable.setModel(tableModel);
+            partTableModel.addRow(array[i]);
+            partsTable.setModel(partTableModel);
         }
     }//GEN-LAST:event_updateButtonActionPerformed
 
@@ -412,7 +397,7 @@ public class AdminJFrame extends javax.swing.JFrame {
             for (int i = 0; i < 5; i++) {
                 param[i] = (String) partsTable.getValueAt(idx, i);
             }
-            tableModel.removeRow(idx);
+            partTableModel.removeRow(idx);
             PartDB parts = new PartDB();
             parts.deleteData(param);
             System.out.println("return to main form");
@@ -426,14 +411,53 @@ public class AdminJFrame extends javax.swing.JFrame {
 
     private void deleteOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteOrderButtonActionPerformed
         // TODO add your handling code here:
+        if (evt.getSource()==deleteOrderButton) {
+            System.out.println("delet button pressed...");
+            int idx = partsOrderTable.getSelectedRow();
+            System.out.println(idx);
+            String[] param = new String[5];
+            System.out.println("initialisated");
+            for (int i = 0; i < 5; i++) {
+                System.out.println("cycle: " + i);
+                param[i] = (String) partsOrderTable.getValueAt(idx, i);
+            }
+            partOrderTableModel.removeRow(idx);
+            PartOrderDB parts = new PartOrderDB();
+            parts.deleteData(param);
+            System.out.println("return to main form");
+            
+        }
     }//GEN-LAST:event_deleteOrderButtonActionPerformed
 
     private void updateOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateOrderButtonActionPerformed
         // TODO add your handling code here:
+        if (evt.getSource()==updateOrderButton) {
+            PartOrderDB parts = new PartOrderDB();
+            Object[][] array = null;
+            System.out.println("getting data...");
+            try {
+                array = parts.getData();
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("got data...");
+            partOrderTableModel = new DefaultTableModel();
+            Object[] columnsHeader = new String[] {"Название", "Тип", "Цена", "Количество", "Заказ"};
+            partOrderTableModel.setColumnIdentifiers(columnsHeader);
+            for (int i = 0; i < array.length; i++)
+            partOrderTableModel.addRow(array[i]);
+            partsOrderTable.setModel(partOrderTableModel);
+        }
     }//GEN-LAST:event_updateOrderButtonActionPerformed
 
     private void addPartOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartOrderButtonActionPerformed
         // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new AddPartOrderJFrame().setVisible(true);
+            }
+        });
     }//GEN-LAST:event_addPartOrderButtonActionPerformed
 
     /**

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/SQLTemplate.sql to edit this template
  */
 
-DROP TABLE IF EXISTS mechanic, "order", order_part, order_work, part, part_request, work, work_type, "user";
+DROP TABLE IF EXISTS mechanic, "order", order_part, order_work, part, part_order, work, work_type, "user";
 
 CREATE TABLE IF NOT EXISTS mechanic
 (
@@ -49,10 +49,12 @@ CREATE TABLE IF NOT EXISTS part
     CONSTRAINT part_pkey PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS part_request
+CREATE TABLE IF NOT EXISTS part_order
 (
     part_name character varying(50),
-    number_of_details int,
+    part_type character varying(50),
+    price int,
+    amount int,
     order_id int
 );
 
@@ -99,6 +101,11 @@ INSERT INTO part (id, name, type, price, amount, order_id)
 VALUES  (DEFAULT, 'Сцепление', 'Трансмиссия', 10000, 1, 1234),
         (DEFAULT, 'Масло', 'Трансмиссия', 2000, 2, 4321),
         (DEFAULT, 'МКПП', 'Трансмиссия', 150000, 1, 1234);
+
+INSERT INTO part_order (part_name, part_type, price, amount, order_id)
+VALUES  ('Амортизатор', 'Подвеска', 10000, 4, 4321),
+        ('Сайлентблок', 'Подвеска', 2000, 20, 7522),
+        ('Шаровая опора', 'Подвеска', 15000, 3, 7522);
 /**
  * Author:  Игорь
  * Created: 17 дек. 2022 г.
