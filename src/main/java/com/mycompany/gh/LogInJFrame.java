@@ -169,7 +169,11 @@ public class LogInJFrame extends javax.swing.JFrame {
                     java.awt.EventQueue.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            new AdminJFrame().setVisible(true);
+                            try {
+                                new AdminJFrame(useradd.show(login)).setVisible(true);
+                            } catch (SQLException ex) {
+                                Logger.getLogger(LogInJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     });
                     this.dispose();
@@ -180,7 +184,11 @@ public class LogInJFrame extends javax.swing.JFrame {
                     java.awt.EventQueue.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            new MechanicJFrame().setVisible(true);
+                            try {
+                                new MechanicJFrame(useradd.show(login)).setVisible(true);
+                            } catch (SQLException ex) {
+                                Logger.getLogger(LogInJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     });
                     this.dispose();
@@ -190,7 +198,11 @@ public class LogInJFrame extends javax.swing.JFrame {
                     java.awt.EventQueue.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            new ClientJFrame().setVisible(true);
+                            try {
+                                new AdminJFrame(useradd.show(login)).setVisible(true);
+                            } catch (SQLException ex) {
+                                Logger.getLogger(LogInJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     });
                     this.dispose();
@@ -264,6 +276,21 @@ public class LogInJFrame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(LogInJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
