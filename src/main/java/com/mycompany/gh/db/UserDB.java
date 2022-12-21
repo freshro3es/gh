@@ -23,10 +23,7 @@ public class UserDB {
      * @param role
      */
     public boolean add(String name, String lastname, String email, String pswd, String role) {
-        
-
         String query = "INSERT INTO \"user\"(name, lastname, email, password, role) VALUES(?, ?, ?, ?, ?)";
-
         try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
             PreparedStatement pst = con.prepareStatement(query)) {
             pst.setString(1, name);
@@ -36,7 +33,6 @@ public class UserDB {
             pst.setString(5, role);
             pst.executeUpdate();
         } catch (SQLException ex) {
-
             Logger lgr = Logger.getLogger(UserDB.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
             return false;
@@ -44,6 +40,20 @@ public class UserDB {
         return true;
     }
     
+    
+    public void delete(String login) {
+        System.out.println("deleteData started...");
+        String query = "DELETE FROM \"user\" WHERE email=?";
+        try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
+            PreparedStatement pst = con.prepareStatement(query)) {
+            pst.setString(1, login);
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(UserDB.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        System.out.println("deleteData ended...");
+    }
     
     public String find(String email, String pswd) {
 

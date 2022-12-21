@@ -4,6 +4,8 @@
  */
 package com.mycompany.gh;
 
+import com.mycompany.gh.db.UserDB;
+
 /**
  *
  * @author Игорь
@@ -15,15 +17,17 @@ public class ClientJFrame extends javax.swing.JFrame {
     private static String lastname;
     private static String login;
     private static String password;
+    private static String role;
 
     /**
      * Creates new form ClientJFrame
      */
     public ClientJFrame(String[] param) {
-        name = param[0];
-        lastname = param[1];
-        login = param[2];
-        password = param[3];
+        name = param[2];
+        lastname = param[3];
+        login = param[0];
+        password = param[1];
+        role = param[4];
         initComponents();
     }
 
@@ -54,7 +58,8 @@ public class ClientJFrame extends javax.swing.JFrame {
         loginLabel = new javax.swing.JLabel();
         passwordField = new javax.swing.JTextField();
         passwordLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        saveProfileButton = new javax.swing.JButton();
+        quitProfileButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -160,7 +165,19 @@ public class ClientJFrame extends javax.swing.JFrame {
 
         passwordLabel.setText("Пароль");
 
-        jButton1.setText("Сохранить");
+        saveProfileButton.setText("Сохранить");
+        saveProfileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveProfileButtonActionPerformed(evt);
+            }
+        });
+
+        quitProfileButton.setText("Выйти");
+        quitProfileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitProfileButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -183,8 +200,10 @@ public class ClientJFrame extends javax.swing.JFrame {
                         .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(242, 242, 242))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(335, 335, 335)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(262, 262, 262)
+                .addComponent(saveProfileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addComponent(quitProfileButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -206,9 +225,11 @@ public class ClientJFrame extends javax.swing.JFrame {
                 .addComponent(passwordLabel)
                 .addGap(4, 4, 4)
                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jButton1)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveProfileButton)
+                    .addComponent(quitProfileButton))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
@@ -262,6 +283,28 @@ public class ClientJFrame extends javax.swing.JFrame {
         passwordField.setText(password);
     }//GEN-LAST:event_formWindowOpened
 
+    private void saveProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProfileButtonActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource()==saveProfileButton) {
+            new UserDB().delete(login);
+            new UserDB().add(nameField.getText(), lastnameField.getText(),
+                    loginField.getText(), passwordField.getText(), role);
+        }
+    }//GEN-LAST:event_saveProfileButtonActionPerformed
+
+    private void quitProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitProfileButtonActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource()==quitProfileButton) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    new LogInJFrame().setVisible(true);
+                }
+            });
+            this.dispose();
+        }
+    }//GEN-LAST:event_quitProfileButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -300,7 +343,6 @@ public class ClientJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea expertMechanicsLabel;
     private javax.swing.JTextArea guaranteesLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -316,7 +358,9 @@ public class ClientJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField passwordField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JTabbedPane profile;
+    private javax.swing.JButton quitProfileButton;
     private javax.swing.JPanel request;
+    private javax.swing.JButton saveProfileButton;
     private javax.swing.JLabel tonAuto;
     // End of variables declaration//GEN-END:variables
 }

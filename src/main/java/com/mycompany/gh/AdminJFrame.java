@@ -6,6 +6,7 @@ package com.mycompany.gh;
 
 import com.mycompany.gh.db.PartDB;
 import com.mycompany.gh.db.PartOrderDB;
+import com.mycompany.gh.db.UserDB;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,10 +31,10 @@ public class AdminJFrame extends javax.swing.JFrame {
      * Creates new form mainJFrame
      */
     public AdminJFrame(String[] param) {
-        name = param[0];
-        lastname = param[1];
-        login = param[2];
-        password = param[3];
+        name = param[2];
+        lastname = param[3];
+        login = param[0];
+        password = param[1];
         role = param[4];
         initComponents();
     }
@@ -82,7 +83,8 @@ public class AdminJFrame extends javax.swing.JFrame {
         passwordLabel = new javax.swing.JLabel();
         roleField = new javax.swing.JTextField();
         roleLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        saveProfileButton = new javax.swing.JButton();
+        quitProfileButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -381,7 +383,19 @@ public class AdminJFrame extends javax.swing.JFrame {
 
         roleLabel.setText("Роль");
 
-        jButton1.setText("Сохранить");
+        saveProfileButton.setText("Сохранить");
+        saveProfileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveProfileButtonActionPerformed(evt);
+            }
+        });
+
+        quitProfileButton.setText("Выйти");
+        quitProfileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitProfileButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -408,8 +422,10 @@ public class AdminJFrame extends javax.swing.JFrame {
                             .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(242, 242, 242))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(333, 333, 333)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(271, 271, 271)
+                .addComponent(saveProfileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(quitProfileButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -435,9 +451,11 @@ public class AdminJFrame extends javax.swing.JFrame {
                 .addComponent(roleLabel)
                 .addGap(4, 4, 4)
                 .addComponent(roleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jButton1)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveProfileButton)
+                    .addComponent(quitProfileButton))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
@@ -594,6 +612,28 @@ public class AdminJFrame extends javax.swing.JFrame {
         roleField.setText(role);
     }//GEN-LAST:event_formWindowOpened
 
+    private void saveProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProfileButtonActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource()==saveProfileButton) {
+            new UserDB().delete(login);
+            new UserDB().add(nameField.getText(), lastnameField.getText(),
+                    loginField.getText(), passwordField.getText(), role);
+        }
+    }//GEN-LAST:event_saveProfileButtonActionPerformed
+
+    private void quitProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitProfileButtonActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource()==quitProfileButton) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                @Override
+                public void run() {  
+                    new LogInJFrame().setVisible(true);       
+                }
+            });
+            this.dispose();
+        }
+    }//GEN-LAST:event_quitProfileButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -636,7 +676,6 @@ public class AdminJFrame extends javax.swing.JFrame {
     private javax.swing.JButton deleteOrderButton;
     private javax.swing.JTextArea expertMechanicsLabel;
     private javax.swing.JTextArea guaranteesLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -659,8 +698,10 @@ public class AdminJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField passwordField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JPanel profile;
+    private javax.swing.JButton quitProfileButton;
     private javax.swing.JTextField roleField;
     private javax.swing.JLabel roleLabel;
+    private javax.swing.JButton saveProfileButton;
     private javax.swing.JLabel tonAuto;
     private javax.swing.JButton updateButton;
     private javax.swing.JButton updateOrderButton;
