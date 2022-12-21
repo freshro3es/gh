@@ -66,17 +66,19 @@ public class UserDB {
     
     public String[] show(String login) throws SQLException {
         String[] param = new String[5];
-        String query = "SELECT * FROM \"user\" WHERE email=?";
+        String query = "SELECT * FROM \"user\" WHERE email = ?";
         try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
             PreparedStatement pst = con.prepareStatement(query)){
                 pst.setString(1, login);
                 ResultSet rs = pst.executeQuery();
-                param[0] = rs.getString(1);
-                param[1] = rs.getString(2);
-                param[2] = rs.getString(3);
-                param[3] = rs.getString(4);
-                param[4] = rs.getString(5);
-            
+                if (rs.next()) {
+                    param[0] = rs.getString(1);
+                    param[1] = rs.getString(2);
+                    param[2] = rs.getString(3);
+                    param[3] = rs.getString(4);
+                    param[4] = rs.getString(5);
+                }
+
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(UserDB.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);

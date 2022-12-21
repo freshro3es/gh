@@ -18,11 +18,22 @@ public class MechanicJFrame extends javax.swing.JFrame {
     
     
     DefaultTableModel partTableModel;
+    
+    private static String name;
+    private static String lastname;
+    private static String login;
+    private static String password;
+    private static String role;
 
     /**
      * Creates new form MechanicJFrame
      */
-    public MechanicJFrame() {
+    public MechanicJFrame(String[] param) {
+        name = param[0];
+        lastname = param[1];
+        login = param[2];
+        password = param[3];
+        role = param[4];
         initComponents();
     }
 
@@ -35,7 +46,7 @@ public class MechanicJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        profile = new javax.swing.JTabbedPane();
         main = new javax.swing.JPanel();
         guaranteesLabel = new javax.swing.JTextArea();
         tonAuto = new javax.swing.JLabel();
@@ -50,10 +61,30 @@ public class MechanicJFrame extends javax.swing.JFrame {
         updateButton = new javax.swing.JButton();
         addPartButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        profile1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        nameField = new javax.swing.JTextField();
+        nameLabel = new javax.swing.JLabel();
+        lastnameField = new javax.swing.JTextField();
+        lastnameLabel = new javax.swing.JLabel();
+        loginField = new javax.swing.JTextField();
+        loginLabel = new javax.swing.JLabel();
+        passwordField = new javax.swing.JTextField();
+        passwordLabel = new javax.swing.JLabel();
+        roleField = new javax.swing.JTextField();
+        roleLabel = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        profile.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
         guaranteesLabel.setEditable(false);
         guaranteesLabel.setColumns(20);
@@ -113,7 +144,7 @@ public class MechanicJFrame extends javax.swing.JFrame {
                 .addGap(114, 114, 114))
         );
 
-        jTabbedPane1.addTab("Главная", main);
+        profile.addTab("Главная", main);
 
         javax.swing.GroupLayout currentOrderLayout = new javax.swing.GroupLayout(currentOrder);
         currentOrder.setLayout(currentOrderLayout);
@@ -126,7 +157,7 @@ public class MechanicJFrame extends javax.swing.JFrame {
             .addGap(0, 512, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Текущий", currentOrder);
+        profile.addTab("Текущий", currentOrder);
 
         javax.swing.GroupLayout ordersLayout = new javax.swing.GroupLayout(orders);
         orders.setLayout(ordersLayout);
@@ -139,7 +170,7 @@ public class MechanicJFrame extends javax.swing.JFrame {
             .addGap(0, 512, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Заказы", orders);
+        profile.addTab("Заказы", orders);
 
         partsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -227,17 +258,135 @@ public class MechanicJFrame extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        jTabbedPane1.addTab("Склад деталей", partsDB);
+        profile.addTab("Склад деталей", partsDB);
+
+        nameLabel.setText("Имя");
+
+        lastnameLabel.setText("Фамилия");
+
+        loginLabel.setText("Логин");
+
+        passwordLabel.setText("Пароль");
+
+        roleLabel.setText("Роль");
+
+        jButton1.setText("Сохранить");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(246, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(roleField)
+                        .addComponent(roleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(passwordField)
+                            .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(loginField)
+                            .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lastnameField)
+                            .addComponent(lastnameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(nameField)
+                            .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(242, 242, 242))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(333, 333, 333)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(nameLabel)
+                .addGap(4, 4, 4)
+                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lastnameLabel)
+                .addGap(4, 4, 4)
+                .addComponent(lastnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(loginLabel)
+                .addGap(4, 4, 4)
+                .addComponent(loginField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passwordLabel)
+                .addGap(4, 4, 4)
+                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(roleLabel)
+                .addGap(4, 4, 4)
+                .addComponent(roleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jButton1)
+                .addContainerGap(125, Short.MAX_VALUE))
+        );
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Профиль");
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout profile1Layout = new javax.swing.GroupLayout(profile1);
+        profile1.setLayout(profile1Layout);
+        profile1Layout.setHorizontalGroup(
+            profile1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(profile1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(profile1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        profile1Layout.setVerticalGroup(
+            profile1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profile1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 797, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(profile1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 512, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(profile1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        profile.addTab("Профиль", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(profile)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(profile)
         );
 
         pack();
@@ -294,6 +443,15 @@ public class MechanicJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        nameField.setText(name);
+        lastnameField.setText(lastname);
+        loginField.setText(login);
+        passwordField.setText(password);
+        roleField.setText(role);
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -322,11 +480,11 @@ public class MechanicJFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MechanicJFrame().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new MechanicJFrame().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -335,14 +493,29 @@ public class MechanicJFrame extends javax.swing.JFrame {
     private javax.swing.JButton deleteButton;
     private javax.swing.JTextArea expertMechanicsLabel;
     private javax.swing.JTextArea guaranteesLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField lastnameField;
+    private javax.swing.JLabel lastnameLabel;
+    private javax.swing.JTextField loginField;
+    private javax.swing.JLabel loginLabel;
     private javax.swing.JPanel main;
     private javax.swing.JTextArea marketYearsLabel;
+    private javax.swing.JTextField nameField;
+    private javax.swing.JLabel nameLabel;
     private javax.swing.JPanel orders;
     private javax.swing.JPanel partsDB;
     private javax.swing.JTable partsTable;
+    private javax.swing.JTextField passwordField;
+    private javax.swing.JLabel passwordLabel;
+    private javax.swing.JTabbedPane profile;
+    private javax.swing.JPanel profile1;
+    private javax.swing.JTextField roleField;
+    private javax.swing.JLabel roleLabel;
     private javax.swing.JLabel tonAuto;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
