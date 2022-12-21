@@ -3,15 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/SQLTemplate.sql to edit this template
  */
 
-DROP TABLE IF EXISTS mechanic, "order", order_part, order_work, part, part_order, work, work_type, "user";
-
-CREATE TABLE IF NOT EXISTS mechanic
-(
-    mail character varying(50),
-    name character varying(100),
-    id smallint NOT NULL,
-    CONSTRAINT mechanic_pkey PRIMARY KEY (id)
-);
+DROP TABLE IF EXISTS "order", part, part_order, work, work_type, "user";
 
 CREATE TABLE IF NOT EXISTS "order"
 (
@@ -21,21 +13,6 @@ CREATE TABLE IF NOT EXISTS "order"
     order_status boolean,
     car_name character varying(50),
     CONSTRAINT order_pkey PRIMARY KEY (order_id)
-);
-
-CREATE TABLE IF NOT EXISTS order_part
-(
-    order_id smallint,
-    part_id smallint,
-    number_of_details smallint
-);
-
-CREATE TABLE IF NOT EXISTS order_work
-(
-    order_id smallint,
-    work_id smallint,
-    mechanic_id time without time zone,
-    work_status boolean
 );
 
 CREATE TABLE IF NOT EXISTS part
@@ -58,29 +35,19 @@ CREATE TABLE IF NOT EXISTS part_order
     order_id int
 );
 
-CREATE TABLE IF NOT EXISTS parts_request
-(
-    order_id smallint,
-    mechanic_id smallint
-);
-
 CREATE TABLE IF NOT EXISTS work
 (
-    work_id smallint NOT NULL,
+    work_id serial NOT NULL,
     work_type_id smallint NOT NULL,
     work_name character varying(50),
     execution_duration time without time zone,
-    work_cost real,
-    CONSTRAINT work_pkey PRIMARY KEY (work_id),
-    CONSTRAINT work_work_name_key UNIQUE (work_name)
+    work_cost real
 );
 
 CREATE TABLE IF NOT EXISTS work_type
 (
-    work_type_id smallint NOT NULL,
-    work_type_name character varying(50),
-    CONSTRAINT work_type_pkey PRIMARY KEY (work_type_id),
-    CONSTRAINT work_type_work_type_name_key UNIQUE (work_type_name)
+    work_type_id serial NOT NULL,
+    work_type_name character varying(50)
 );
 
 CREATE TABLE IF NOT EXISTS "user"
@@ -109,6 +76,39 @@ INSERT INTO part_order (part_name, part_type, price, amount, order_id)
 VALUES  ('Амортизатор', 'Подвеска', 10000, 4, 4321),
         ('Сайлентблок', 'Подвеска', 2000, 20, 7522),
         ('Шаровая опора', 'Подвеска', 15000, 3, 7522);
+
+INSERT INTO work_type (work_type_id, work_type_name)
+VALUES  (DEFAULT, 'Техническое обслуживание'),
+        (DEFAULT, 'Двигатель и система охлаждения'),
+        (DEFAULT, 'Кузовной ремонт и сварочные работы'),
+        (DEFAULT, 'Обслуживание ходовой части'),
+        (DEFAULT, 'Шиномонтаж и сход-развал'),
+        (DEFAULT, 'Трансмиссия'),
+        (DEFAULT, 'Рулевое управление'),
+        (DEFAULT, 'Тормозная система'),
+        (DEFAULT, 'Дополнительные услуги');
+
+INSERT INTO work (work_id, work_type_id, work_name, execution_duration, work_cost)
+VALUES  (DEFAULT, 1, 'Замена масла в ДВС', '00:10:00', 1321),
+        (DEFAULT, 1, 'Замена масляного фильтра', '00:10:00', 1321),
+        (DEFAULT, 1, 'Замена воздушного фильтра', '00:10:00', 1321),
+        (DEFAULT, 1, 'Замена топливного фильтра', '00:10:00', 1321),
+        (DEFAULT, 1, 'Сброс межсервисных интервалов', '00:10:00', 1321),
+        (DEFAULT, 1, 'Замена тормозной жидкости', '00:10:00', 1321),
+        (DEFAULT, 1, 'Замена охлаждающей жидкости', '00:10:00', 1321),
+        (DEFAULT, 1, 'Замена патрубков системы охлаждения', '00:10:00', 1321),
+        (DEFAULT, 1, 'Замена жидкости ГУР', '00:10:00', 1321),
+        (DEFAULT, 1, 'Диагностика форсунок (диагностика инжектора)', '00:10:00', 1321);
+
+
+CREATE TABLE IF NOT EXISTS work
+(
+    work_id serial NOT NULL,
+    work_type_id smallint NOT NULL,
+    work_name character varying(50),
+    execution_duration time without time zone,
+    work_cost real
+);
 /**
  * Author:  Игорь
  * Created: 17 дек. 2022 г.
