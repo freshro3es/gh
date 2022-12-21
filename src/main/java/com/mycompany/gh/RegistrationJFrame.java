@@ -197,7 +197,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
             if (result) {
                 java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {
-                        new LogInJFrame().setVisible(true);
+                        new LoginJFrame().setVisible(true);
                     }
                 });
                 this.dispose();
@@ -226,7 +226,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    new LogInJFrame().setVisible(true);
+                    new LoginJFrame().setVisible(true);
                 }
             });
             this.dispose();
