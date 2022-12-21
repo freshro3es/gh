@@ -376,38 +376,35 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace pref="246" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="roleField" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="roleLabel" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="passwordField" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="passwordLabel" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="loginField" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="loginLabel" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="lastnameField" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="lastnameLabel" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="nameField" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="nameLabel" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="242" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="passwordField" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="passwordLabel" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="loginField" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="loginLabel" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="lastnameField" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="lastnameLabel" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="nameField" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="nameLabel" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jButton1" min="-2" pref="102" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="336" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="242" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="333" max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" pref="102" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -430,13 +427,9 @@
                               <Component id="passwordLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               <Component id="passwordField" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="roleLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Component id="roleField" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="125" max="32767" attributes="0"/>
+                              <EmptySpace pref="171" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -468,13 +461,6 @@
                     <Component class="javax.swing.JLabel" name="passwordLabel">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&#x41f;&#x430;&#x440;&#x43e;&#x43b;&#x44c;"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="roleField">
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="roleLabel">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="&#x420;&#x43e;&#x43b;&#x44c;"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton1">

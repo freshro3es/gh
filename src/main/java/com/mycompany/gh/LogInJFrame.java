@@ -199,7 +199,7 @@ public class LogInJFrame extends javax.swing.JFrame {
                         @Override
                         public void run() {
                             try {
-                                new AdminJFrame(useradd.show(login)).setVisible(true);
+                                new ClientJFrame(useradd.show(login)).setVisible(true);
                             } catch (SQLException ex) {
                                 Logger.getLogger(LogInJFrame.class.getName()).log(Level.SEVERE, null, ex);
                             }
