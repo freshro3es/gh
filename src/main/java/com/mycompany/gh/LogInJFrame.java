@@ -6,6 +6,9 @@ package com.mycompany.gh;
 
 import com.mycompany.gh.db.UserDB;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -144,12 +147,12 @@ public class LogInJFrame extends javax.swing.JFrame {
         if (evt.getSource()==jButton1) {
             
             //получаю данные с введенных полей
-            String email = logInField.getText();
+            String login = logInField.getText();
             String pswd = new String(passwordField.getPassword());
             
             //создаю новый экземпляр класса, работающего с таблицей "user", произвожу поиск аккаунта
             UserDB useradd = new UserDB();
-            String result = useradd.find(email, pswd);
+            String result = useradd.find(login, pswd);
             
             //обработка результата поиска аккаунта
             System.out.println(result);
@@ -171,6 +174,7 @@ public class LogInJFrame extends javax.swing.JFrame {
                     });
                     this.dispose();
                     break;
+
                 case "mechanic":
                     // code block
                     java.awt.EventQueue.invokeLater(new Runnable() {
