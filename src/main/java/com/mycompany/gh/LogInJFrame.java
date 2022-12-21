@@ -173,9 +173,23 @@ public class LogInJFrame extends javax.swing.JFrame {
                     break;
                 case "mechanic":
                     // code block
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            new MechanicJFrame().setVisible(true);
+                        }
+                    });
+                    this.dispose();
                     break;
                 case "client":
                     // code block
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            new ClientJFrame().setVisible(true);
+                        }
+                    });
+                    this.dispose();
                     break;
                 default:
                 // code block

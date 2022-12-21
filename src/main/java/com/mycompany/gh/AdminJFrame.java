@@ -44,7 +44,7 @@ public class AdminJFrame extends javax.swing.JFrame {
         expertMechanicsLabel = new javax.swing.JTextArea();
         marketYearsLabel = new javax.swing.JTextArea();
         guaranteesLabel = new javax.swing.JTextArea();
-        attendance = new javax.swing.JPanel();
+        newRecords = new javax.swing.JPanel();
         partsOrder = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         partsOrderTable = new javax.swing.JTable();
@@ -59,7 +59,9 @@ public class AdminJFrame extends javax.swing.JFrame {
         updateButton = new javax.swing.JButton();
         addPartButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        newRecords = new javax.swing.JPanel();
+        attendance = new javax.swing.JPanel();
+        adminPanel = new javax.swing.JPanel();
+        profile = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ТонАвто ИС");
@@ -127,18 +129,18 @@ public class AdminJFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Главная", main);
 
-        javax.swing.GroupLayout attendanceLayout = new javax.swing.GroupLayout(attendance);
-        attendance.setLayout(attendanceLayout);
-        attendanceLayout.setHorizontalGroup(
-            attendanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout newRecordsLayout = new javax.swing.GroupLayout(newRecords);
+        newRecords.setLayout(newRecordsLayout);
+        newRecordsLayout.setHorizontalGroup(
+            newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 792, Short.MAX_VALUE)
         );
-        attendanceLayout.setVerticalGroup(
-            attendanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        newRecordsLayout.setVerticalGroup(
+            newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 512, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Посещаемость", attendance);
+        jTabbedPane1.addTab("Новые записи", newRecords);
 
         partsOrderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -161,11 +163,6 @@ public class AdminJFrame extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
-            }
-        });
-        partsOrderTable.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                partsOrderTableComponentShown(evt);
             }
         });
         jScrollPane2.setViewportView(partsOrderTable);
@@ -256,11 +253,6 @@ public class AdminJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        partsTable.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                partsTableComponentShown(evt);
-            }
-        });
         jScrollPane1.setViewportView(partsTable);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
@@ -326,18 +318,44 @@ public class AdminJFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Склад деталей", partsDB);
 
-        javax.swing.GroupLayout newRecordsLayout = new javax.swing.GroupLayout(newRecords);
-        newRecords.setLayout(newRecordsLayout);
-        newRecordsLayout.setHorizontalGroup(
-            newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout attendanceLayout = new javax.swing.GroupLayout(attendance);
+        attendance.setLayout(attendanceLayout);
+        attendanceLayout.setHorizontalGroup(
+            attendanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 792, Short.MAX_VALUE)
         );
-        newRecordsLayout.setVerticalGroup(
-            newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        attendanceLayout.setVerticalGroup(
+            attendanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 512, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Новые записи", newRecords);
+        jTabbedPane1.addTab("Посещаемость", attendance);
+
+        javax.swing.GroupLayout adminPanelLayout = new javax.swing.GroupLayout(adminPanel);
+        adminPanel.setLayout(adminPanelLayout);
+        adminPanelLayout.setHorizontalGroup(
+            adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 792, Short.MAX_VALUE)
+        );
+        adminPanelLayout.setVerticalGroup(
+            adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 512, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Админ-панель", adminPanel);
+
+        javax.swing.GroupLayout profileLayout = new javax.swing.GroupLayout(profile);
+        profile.setLayout(profileLayout);
+        profileLayout.setHorizontalGroup(
+            profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 792, Short.MAX_VALUE)
+        );
+        profileLayout.setVerticalGroup(
+            profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 512, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Профиль", profile);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -354,18 +372,16 @@ public class AdminJFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void partsTableComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_partsTableComponentShown
-        // TODO add your handling code here:
-    }//GEN-LAST:event_partsTableComponentShown
-
     private void addPartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartButtonActionPerformed
         // TODO add your handling code here:
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new AddPartJFrame().setVisible(true);
-            }
-        });
+        if (evt.getSource()==addPartButton) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    new AddPartJFrame().setVisible(true);
+                }
+            });
+        }
     }//GEN-LAST:event_addPartButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
@@ -404,10 +420,6 @@ public class AdminJFrame extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
-
-    private void partsOrderTableComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_partsOrderTableComponentShown
-        // TODO add your handling code here:
-    }//GEN-LAST:event_partsOrderTableComponentShown
 
     private void deleteOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteOrderButtonActionPerformed
         // TODO add your handling code here:
@@ -452,12 +464,14 @@ public class AdminJFrame extends javax.swing.JFrame {
 
     private void addPartOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartOrderButtonActionPerformed
         // TODO add your handling code here:
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new AddPartOrderJFrame().setVisible(true);
-            }
-        });
+        if (evt.getSource()==addPartOrderButton) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    new AddPartOrderJFrame().setVisible(true);
+                }
+            });
+        }
     }//GEN-LAST:event_addPartOrderButtonActionPerformed
 
     /**
@@ -496,6 +510,7 @@ public class AdminJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPartButton;
     private javax.swing.JButton addPartOrderButton;
+    private javax.swing.JPanel adminPanel;
     private javax.swing.JPanel attendance;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton deleteOrderButton;
@@ -512,6 +527,7 @@ public class AdminJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel partsOrder;
     private javax.swing.JTable partsOrderTable;
     private javax.swing.JTable partsTable;
+    private javax.swing.JPanel profile;
     private javax.swing.JLabel tonAuto;
     private javax.swing.JButton updateButton;
     private javax.swing.JButton updateOrderButton;
