@@ -50,7 +50,7 @@ public class AdminJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.JTabbedPane jTabbedPane1 = new javax.swing.JTabbedPane();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         main = new javax.swing.JPanel();
         tonAuto = new javax.swing.JLabel();
         expertMechanicsLabel = new javax.swing.JTextArea();
@@ -71,7 +71,6 @@ public class AdminJFrame extends javax.swing.JFrame {
         updateButton = new javax.swing.JButton();
         addPartButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        attendance = new javax.swing.JPanel();
         adminPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         usersTable = new javax.swing.JTable();
@@ -151,7 +150,7 @@ public class AdminJFrame extends javax.swing.JFrame {
                         .addComponent(guaranteesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tonAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(expertMechanicsLabel))
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
         mainLayout.setVerticalGroup(
             mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +172,7 @@ public class AdminJFrame extends javax.swing.JFrame {
         newRecords.setLayout(newRecordsLayout);
         newRecordsLayout.setHorizontalGroup(
             newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 792, Short.MAX_VALUE)
+            .addGap(0, 793, Short.MAX_VALUE)
         );
         newRecordsLayout.setVerticalGroup(
             newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,7 +240,7 @@ public class AdminJFrame extends javax.swing.JFrame {
                 .addGroup(partsOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(partsOrderLayout.createSequentialGroup()
                         .addGroup(partsOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
                             .addComponent(partOrderLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(78, 78, 78))
                     .addGroup(partsOrderLayout.createSequentialGroup()
@@ -329,7 +328,7 @@ public class AdminJFrame extends javax.swing.JFrame {
                 .addGroup(partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(partsDBLayout.createSequentialGroup()
                         .addGroup(partsDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(78, 78, 78))
                     .addGroup(partsDBLayout.createSequentialGroup()
@@ -357,19 +356,6 @@ public class AdminJFrame extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Склад деталей", partsDB);
-
-        javax.swing.GroupLayout attendanceLayout = new javax.swing.GroupLayout(attendance);
-        attendance.setLayout(attendanceLayout);
-        attendanceLayout.setHorizontalGroup(
-            attendanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 792, Short.MAX_VALUE)
-        );
-        attendanceLayout.setVerticalGroup(
-            attendanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 512, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Посещаемость", attendance);
 
         usersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -434,7 +420,7 @@ public class AdminJFrame extends javax.swing.JFrame {
                         .addComponent(usersLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, adminPanelLayout.createSequentialGroup()
-                        .addGap(0, 60, Short.MAX_VALUE)
+                        .addGap(0, 61, Short.MAX_VALUE)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(80, 80, 80))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, adminPanelLayout.createSequentialGroup()
@@ -507,7 +493,7 @@ public class AdminJFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(246, Short.MAX_VALUE)
+                .addContainerGap(247, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(roleField)
@@ -678,6 +664,75 @@ public class AdminJFrame extends javax.swing.JFrame {
         parts.deleteData(param);
      }
     
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        nameField.setText(name);
+        lastnameField.setText(lastname);
+        loginField.setText(login);
+        passwordField.setText(password);
+        roleField.setText(role);
+        updateUsers();
+        updateOrder();
+        updatePart();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void quitProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitProfileButtonActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource()==quitProfileButton) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    new LogInJFrame().setVisible(true);
+                }
+            });
+            this.dispose();
+        }
+    }//GEN-LAST:event_quitProfileButtonActionPerformed
+
+    private void saveProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProfileButtonActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource()==saveProfileButton) {
+            new UserDB().delete(login);
+            new UserDB().add(nameField.getText(), lastnameField.getText(),
+                loginField.getText(), passwordField.getText(), role);
+        }
+    }//GEN-LAST:event_saveProfileButtonActionPerformed
+
+    private void saveUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveUsersButtonActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource()==saveUsersButton) {
+            int idx = usersTable.getSelectedRow();
+            String login = loginAdminField.getText();
+            String role = roleAdminField.getText();
+            usersTableModel.setValueAt(role, idx, 3);
+            new UserDB().setRole(login, role);
+        }
+    }//GEN-LAST:event_saveUsersButtonActionPerformed
+
+    private void updateUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateUsersButtonActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource()==updateUsersButton) {
+            updateUsers();
+        }
+
+    }//GEN-LAST:event_updateUsersButtonActionPerformed
+
+    private void usersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersTableMouseClicked
+        // TODO add your handling code here:
+        if (evt.getSource()==usersTable) {
+            int idx = usersTable.getSelectedRow();
+            loginAdminField.setText((String) usersTable.getValueAt(idx, 2));
+            roleAdminField.setText((String) usersTable.getValueAt(idx, 3));
+        }
+    }//GEN-LAST:event_usersTableMouseClicked
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource()==deleteButton) {
+            deletePart();
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
     //Обработчики событий
     
     private void addPartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartButtonActionPerformed
@@ -699,19 +754,19 @@ public class AdminJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_updateButtonActionPerformed
 
-    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+    private void addPartOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartOrderButtonActionPerformed
         // TODO add your handling code here:
-        if (evt.getSource()==deleteButton) {
-            deletePart();
+        if (evt.getSource()==addPartOrderButton) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    AddPartOrderJFrame addPart = new AddPartOrderJFrame();
+                    addPart.setVisible(true);
+                }
+            });
+            updateOrder();
         }
-    }//GEN-LAST:event_deleteButtonActionPerformed
-
-    private void deleteOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteOrderButtonActionPerformed
-        // TODO add your handling code here:
-        if (evt.getSource()==deleteOrderButton) {
-            deleteOrder();    
-        }
-    }//GEN-LAST:event_deleteOrderButtonActionPerformed
+    }//GEN-LAST:event_addPartOrderButtonActionPerformed
 
     private void updateOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateOrderButtonActionPerformed
         // TODO add your handling code here:
@@ -720,82 +775,12 @@ public class AdminJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_updateOrderButtonActionPerformed
 
-    private void addPartOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartOrderButtonActionPerformed
+    private void deleteOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteOrderButtonActionPerformed
         // TODO add your handling code here:
-        if (evt.getSource()==addPartOrderButton) {
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                   AddPartOrderJFrame addPart = new AddPartOrderJFrame();
-                   addPart.setVisible(true);
-                }
-            });
-            updateOrder();
+        if (evt.getSource()==deleteOrderButton) {
+            deleteOrder();
         }
-    }//GEN-LAST:event_addPartOrderButtonActionPerformed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-        nameField.setText(name);
-        lastnameField.setText(lastname);
-        loginField.setText(login);
-        passwordField.setText(password);
-        roleField.setText(role);
-        updateUsers();
-        updateOrder();
-        updatePart();
-    }//GEN-LAST:event_formWindowOpened
-
-    private void saveProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProfileButtonActionPerformed
-        // TODO add your handling code here:
-        if (evt.getSource()==saveProfileButton) {
-            new UserDB().delete(login);
-            new UserDB().add(nameField.getText(), lastnameField.getText(),
-                    loginField.getText(), passwordField.getText(), role);
-        }
-    }//GEN-LAST:event_saveProfileButtonActionPerformed
-
-    private void quitProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitProfileButtonActionPerformed
-        // TODO add your handling code here:
-        if (evt.getSource()==quitProfileButton) {
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run() {  
-                    new LogInJFrame().setVisible(true);       
-                }
-            });
-            this.dispose();
-        }
-    }//GEN-LAST:event_quitProfileButtonActionPerformed
-
-    private void updateUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateUsersButtonActionPerformed
-        // TODO add your handling code here:
-        if (evt.getSource()==updateUsersButton) {
-            updateUsers();
-        }
-                
-        
-    }//GEN-LAST:event_updateUsersButtonActionPerformed
-
-    private void saveUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveUsersButtonActionPerformed
-        // TODO add your handling code here:
-        if (evt.getSource()==saveUsersButton) {
-            int idx = usersTable.getSelectedRow();
-            String login = loginAdminField.getText();
-            String role = roleAdminField.getText();
-            usersTableModel.setValueAt(role, idx, 3);
-            new UserDB().setRole(login, role);
-        }
-    }//GEN-LAST:event_saveUsersButtonActionPerformed
-
-    private void usersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersTableMouseClicked
-        // TODO add your handling code here:
-        if (evt.getSource()==usersTable) {
-            int idx = usersTable.getSelectedRow();
-            loginAdminField.setText((String) usersTable.getValueAt(idx, 2));
-            roleAdminField.setText((String) usersTable.getValueAt(idx, 3));
-        }
-    }//GEN-LAST:event_usersTableMouseClicked
+    }//GEN-LAST:event_deleteOrderButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -834,7 +819,6 @@ public class AdminJFrame extends javax.swing.JFrame {
     private javax.swing.JButton addPartButton;
     private javax.swing.JButton addPartOrderButton;
     private javax.swing.JPanel adminPanel;
-    private javax.swing.JPanel attendance;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton deleteOrderButton;
     private javax.swing.JTextArea expertMechanicsLabel;
@@ -845,6 +829,7 @@ public class AdminJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField lastnameField;
     private javax.swing.JLabel lastnameLabel;
     private javax.swing.JTextField loginAdminField;

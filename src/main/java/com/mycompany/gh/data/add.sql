@@ -3,17 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/SQLTemplate.sql to edit this template
  */
 
-DROP TABLE IF EXISTS "order", part, part_order, work, work_type, "user";
-
-CREATE TABLE IF NOT EXISTS "order"
-(
-    order_id smallint NOT NULL,
-    terms_of_work time without time zone,
-    client_mail character varying(50),
-    order_status boolean,
-    car_name character varying(50),
-    CONSTRAINT order_pkey PRIMARY KEY (order_id)
-);
+DROP TABLE IF EXISTS "order", order_work, part, part_order, work, work_type, "user";
 
 CREATE TABLE IF NOT EXISTS part
 (
@@ -58,6 +48,23 @@ CREATE TABLE IF NOT EXISTS "user"
     lastname varchar(50) NOT NULL,
     role varchar(15) NOT NULL,
     CONSTRAINT user_pkey PRIMARY KEY (email)
+);
+
+CREATE TABLE IF NOT EXISTS "order"
+(
+    order_id serial NOT NULL,
+    name varchar(50) NOT NULL,
+    lastname varchar(50) NOT NULL,
+    phone varchar(50) NOT NULL,
+    email varchar(50) NOT NULL,
+    status varchar(15) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS order_work
+(
+    order_id int NOT NULL,
+    work_id int NOT NULL,
+    status varchar(15) NOT NULL
 );
 
 INSERT INTO "user" (email, password, name, lastname, role)
