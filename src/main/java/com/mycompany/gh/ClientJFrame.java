@@ -566,14 +566,21 @@ public class ClientJFrame extends javax.swing.JFrame {
         String phone = phoneRequestField.getText();
         String email = emailRequestField.getText();
         String status = "request";
-        new OrderDB().setOrder(name, lastname, phone, email, status);
+        int orderId = new OrderDB().setOrder(name, lastname, phone, email, status);
+        String[] type;
+        Object[] array = new Object[workTableModel.getColumnCount()];
         
-        Object[][] array = new Object[workTableModel.getColumnCount()][workTableModel.getRowCount()];
         Vector<Vector> param = new Vector<Vector>();
         param = workTableModel.getDataVector();
         for (int i = 0; i < workTableModel.getRowCount(); i++) {
             for (int j = 0; j < workTableModel.getColumnCount(); j++) {
-                array[i][j] = param.elementAt(i).elementAt(j);
+                array[j] = param.elementAt(i).elementAt(j);
+                System.out.println(array[j].toString());
+            }
+            try {
+                new OrderDB().setOrderWork(array[1].toString(),orderId);
+            } catch (SQLException ex) {
+                Logger.getLogger(ClientJFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         

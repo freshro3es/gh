@@ -124,7 +124,7 @@ public class OrderDB {
         return param;
     }
     
-    public void setOrder(String name, String lastname, String phone, String email, String status) {
+    public int setOrder(String name, String lastname, String phone, String email, String status) {
         String query = "INSERT INTO \"order\"(name, lastname, phone, email, status) VALUES(?, ?, ?, ?, ?)";
         try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
             PreparedStatement pst = con.prepareStatement(query)) {
@@ -133,6 +133,54 @@ public class OrderDB {
             pst.setString(3, phone);
             pst.setString(4, email);
             pst.setString(5, status);
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(UserDB.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        int work_id = 0;
+        query = "SELECT MAX(order_id)\n" +
+                "FROM \"order\"\n" +
+                "WHERE name=? AND lastname=? AND phone=? AND email=? AND status=?";
+        try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
+            PreparedStatement pst = con.prepareStatement(query)) {
+            pst.setString(1, name);
+            pst.setString(2, lastname);
+            pst.setString(3, phone);
+            pst.setString(4, email);
+            pst.setString(5, status);
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            work_id = rs.getInt(1);
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(UserDB.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return work_id;
+    }
+    
+    public void setOrderWork(String work, int orderId) throws SQLException {
+        int workId = 0; 
+        String query = "SELECT work_id \n" +
+                        "FROM work \n" +
+                        "WHERE work_name=? ";
+        try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
+            PreparedStatement pst = con.prepareStatement(query)) {
+            pst.setString(1, work);
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            workId = rs.getInt(1);
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(UserDB.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        
+        query = "INSERT INTO order_work (order_id, work_id, status)\n" +
+                "VALUES (?, ?, 'Невыполнена')";
+        try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
+            PreparedStatement pst = con.prepareStatement(query)) {
+            pst.setInt(1, orderId);
+            pst.setInt(2, workId);
             pst.executeUpdate();
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(UserDB.class.getName());
