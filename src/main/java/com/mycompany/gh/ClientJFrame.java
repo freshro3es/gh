@@ -4,7 +4,14 @@
  */
 package com.mycompany.gh;
 
+import com.mycompany.gh.db.OrderDB;
 import com.mycompany.gh.db.UserDB;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +25,10 @@ public class ClientJFrame extends javax.swing.JFrame {
     private static String login;
     private static String password;
     private static String role;
+    
+    private DefaultComboBoxModel workTypemodel;
+    private DefaultComboBoxModel workModel;
+    private DefaultTableModel workTableModel = new DefaultTableModel();
 
     /**
      * Creates new form ClientJFrame
@@ -49,24 +60,24 @@ public class ClientJFrame extends javax.swing.JFrame {
         expertMechanicsLabel = new javax.swing.JTextArea();
         marketYearsLabel = new javax.swing.JTextArea();
         request = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        nameRequestField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        lastnameRequestField = new javax.swing.JTextField();
+        phoneRequestLabel = new javax.swing.JLabel();
+        phoneRequestField = new javax.swing.JTextField();
+        emailRequestLabel = new javax.swing.JLabel();
+        emailRequestField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        workTypeBox = new javax.swing.JComboBox<>();
+        workBox = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        workTable = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        addWorkButton = new javax.swing.JButton();
+        deleteWorkButton = new javax.swing.JButton();
+        requestSendButton = new javax.swing.JButton();
         order = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -168,19 +179,21 @@ public class ClientJFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Фамилия");
 
-        jLabel4.setText("Номер телефона");
+        phoneRequestLabel.setText("Номер телефона");
 
-        jLabel5.setText("Автомобиль");
+        emailRequestLabel.setText("Email");
 
         jLabel6.setText("Тип работы");
 
         jLabel7.setText("Работа");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        workTypeBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                workTypeBoxActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        workTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -203,17 +216,32 @@ public class ClientJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(workTable);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Новая заявка");
 
-        jButton1.setText("Добавить");
+        addWorkButton.setText("Добавить");
+        addWorkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addWorkButtonActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Удалить выделенное");
+        deleteWorkButton.setText("Удалить выделенное");
+        deleteWorkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteWorkButtonActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Отправить заявку");
+        requestSendButton.setText("Отправить заявку");
+        requestSendButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestSendButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout requestLayout = new javax.swing.GroupLayout(request);
         request.setLayout(requestLayout);
@@ -225,22 +253,22 @@ public class ClientJFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestLayout.createSequentialGroup()
                         .addGroup(requestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField2)
+                            .addComponent(lastnameRequestField)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1)
+                            .addComponent(nameRequestField)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, 200, Short.MAX_VALUE))
+                            .addComponent(workTypeBox, 0, 200, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(requestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField3)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField4)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(phoneRequestField)
+                            .addComponent(phoneRequestLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(emailRequestLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(emailRequestField)
+                            .addComponent(workBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(186, 186, 186))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestLayout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addWorkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(200, 200, 200))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestLayout.createSequentialGroup()
                 .addContainerGap()
@@ -250,9 +278,9 @@ public class ClientJFrame extends javax.swing.JFrame {
                         .addGap(0, 103, Short.MAX_VALUE)
                         .addGroup(requestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestLayout.createSequentialGroup()
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(requestSendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(deleteWorkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(231, 231, 231))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestLayout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -268,35 +296,35 @@ public class ClientJFrame extends javax.swing.JFrame {
                     .addGroup(requestLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nameRequestField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lastnameRequestField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(requestLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(phoneRequestLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(phoneRequestField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
+                        .addComponent(emailRequestLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(emailRequestField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(requestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(requestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(workTypeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(workBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addWorkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(requestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(deleteWorkButton)
+                    .addComponent(requestSendButton))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
@@ -432,13 +460,55 @@ public class ClientJFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
+    private void updateWorkType() {
+        OrderDB order = new OrderDB();
+        Object[] array = null;
+        try {
+            array = order.getWorkType();
+            workTypemodel = new DefaultComboBoxModel();
+            for (int i = 0; i < array.length; i++)
+                workTypemodel.addElement(array[i]);
+            workTypeBox.setModel(workTypemodel);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    private void updateWork(String type) {
+        OrderDB order = new OrderDB();
+        Object[] array = null;
+        
+        try {
+            array = order.getWork(type);
+            workModel = new DefaultComboBoxModel();
+            for (int i = 0; i < array.length; i++)
+                workModel.addElement(array[i]);
+            workBox.setModel(workModel);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         nameField.setText(name);
         lastnameField.setText(lastname);
         loginField.setText(login);
         passwordField.setText(password);
+        
+        Object[] columnsHeader = new String[] {"Тип работы", "Работа", "Длительность", "Стоимость"};
+        workTableModel.setColumnIdentifiers(columnsHeader);
+        workTable.setModel(workTableModel);
+        
+        nameRequestField.setText(name);
+        lastnameRequestField.setText(lastname);
+        
+        updateWorkType();
     }//GEN-LAST:event_formWindowOpened
 
     private void saveProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProfileButtonActionPerformed
@@ -462,6 +532,52 @@ public class ClientJFrame extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_quitProfileButtonActionPerformed
+
+    private void workTypeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workTypeBoxActionPerformed
+        // TODO add your handling code here:
+        String param = (String) workTypeBox.getSelectedItem();
+        updateWork(param);
+    }//GEN-LAST:event_workTypeBoxActionPerformed
+
+    private void addWorkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWorkButtonActionPerformed
+        // TODO add your handling code here:
+        Object[] array = null;
+        String type, work;
+        type = (String) workTypeBox.getSelectedItem();
+        work = (String) workBox.getSelectedItem();
+        try {
+            array = new OrderDB().getWorkTable(type, work);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        workTableModel.addRow(array);
+    }//GEN-LAST:event_addWorkButtonActionPerformed
+
+    private void deleteWorkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteWorkButtonActionPerformed
+        // TODO add your handling code here:
+        int idx = workTable.getSelectedRow();
+        workTableModel.removeRow(idx);
+    }//GEN-LAST:event_deleteWorkButtonActionPerformed
+
+    private void requestSendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestSendButtonActionPerformed
+        // TODO add your handling code here:
+        String name = nameRequestField.getText();
+        String lastname = lastnameRequestField.getText();
+        String phone = phoneRequestField.getText();
+        String email = emailRequestField.getText();
+        String status = "request";
+        new OrderDB().setOrder(name, lastname, phone, email, status);
+        
+        Object[][] array = new Object[workTableModel.getColumnCount()][workTableModel.getRowCount()];
+        Vector<Vector> param = new Vector<Vector>();
+        param = workTableModel.getDataVector();
+        for (int i = 0; i < workTableModel.getRowCount(); i++) {
+            for (int j = 0; j < workTableModel.getColumnCount(); j++) {
+                array[i][j] = param.elementAt(i).elementAt(j);
+            }
+        }
+        
+    }//GEN-LAST:event_requestSendButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -499,18 +615,15 @@ public class ClientJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addWorkButton;
+    private javax.swing.JButton deleteWorkButton;
+    private javax.swing.JTextField emailRequestField;
+    private javax.swing.JLabel emailRequestLabel;
     private javax.swing.JTextArea expertMechanicsLabel;
     private javax.swing.JTextArea guaranteesLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -519,26 +632,29 @@ public class ClientJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField lastnameField;
     private javax.swing.JLabel lastnameLabel;
+    private javax.swing.JTextField lastnameRequestField;
     private javax.swing.JTextField loginField;
     private javax.swing.JLabel loginLabel;
     private javax.swing.JPanel main;
     private javax.swing.JTextArea marketYearsLabel;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JTextField nameRequestField;
     private javax.swing.JPanel order;
     private javax.swing.JTextField passwordField;
     private javax.swing.JLabel passwordLabel;
+    private javax.swing.JTextField phoneRequestField;
+    private javax.swing.JLabel phoneRequestLabel;
     private javax.swing.JTabbedPane profile;
     private javax.swing.JButton quitProfileButton;
     private javax.swing.JPanel request;
+    private javax.swing.JButton requestSendButton;
     private javax.swing.JButton saveProfileButton;
     private javax.swing.JLabel tonAuto;
+    private javax.swing.JComboBox<String> workBox;
+    private javax.swing.JTable workTable;
+    private javax.swing.JComboBox<String> workTypeBox;
     // End of variables declaration//GEN-END:variables
 }
