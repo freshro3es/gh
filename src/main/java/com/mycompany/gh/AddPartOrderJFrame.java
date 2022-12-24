@@ -4,7 +4,6 @@
  */
 package com.mycompany.gh;
 
-import com.mycompany.gh.db.PartDB;
 import com.mycompany.gh.db.PartOrderDB;
 
 /**
@@ -174,11 +173,10 @@ public class AddPartOrderJFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddPartOrderJFrame().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//                new AddPartOrderJFrame().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

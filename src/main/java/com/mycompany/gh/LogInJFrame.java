@@ -170,7 +170,7 @@ public class LogInJFrame extends javax.swing.JFrame {
                         @Override
                         public void run() {
                             try {
-                                new AdminJFrame(useradd.show(login)).setVisible(true);
+                                new AdminJFrame(useradd.getUser(login)).setVisible(true);
                             } catch (SQLException ex) {
                                 Logger.getLogger(LogInJFrame.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -185,7 +185,7 @@ public class LogInJFrame extends javax.swing.JFrame {
                         @Override
                         public void run() {
                             try {
-                                new MechanicJFrame(useradd.show(login)).setVisible(true);
+                                new MechanicJFrame(useradd.getUser(login)).setVisible(true);
                             } catch (SQLException ex) {
                                 Logger.getLogger(LogInJFrame.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -199,7 +199,7 @@ public class LogInJFrame extends javax.swing.JFrame {
                         @Override
                         public void run() {
                             try {
-                                new ClientJFrame(useradd.show(login)).setVisible(true);
+                                new ClientJFrame(useradd.getUser(login)).setVisible(true);
                             } catch (SQLException ex) {
                                 Logger.getLogger(LogInJFrame.class.getName()).log(Level.SEVERE, null, ex);
                             }

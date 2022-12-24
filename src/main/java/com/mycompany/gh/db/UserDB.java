@@ -74,7 +74,7 @@ public class UserDB {
         return "0";
     }
     
-    public String[] show(String login) throws SQLException {
+    public String[] getUser(String login) throws SQLException {
         String[] param = new String[5];
         String query = "SELECT * FROM \"user\" WHERE email = ?";
         try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
@@ -93,6 +93,51 @@ public class UserDB {
             Logger lgr = Logger.getLogger(UserDB.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
+        return param;
+    }
+    
+    public int count() throws SQLException {
+        System.out.println("count connected...");
+        int count = -1;
+        try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
+                
+            PreparedStatement stmt = con.prepareStatement("select count(*) from \"user\"");
+            ResultSet res = stmt.executeQuery()) {
+                res.next();
+                count = res.getInt(1);
+            }  
+        catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(UserDB.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        System.out.println("cout ended...");
+        return count;
+    }
+    
+    public String[][] getData(String login) throws SQLException {
+        System.out.println("getData started...");
+        int n = this.count();
+        String[][] param = new String[n-1][4];
+            
+        try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM \"user\" WHERE email != ?")) {
+            pst.setString(1, login);
+            ResultSet rs = pst.executeQuery();
+            int i = 0;
+            while (rs.next()) {
+                param[i][0] = rs.getString(3);
+                param[i][1] = rs.getString(4);
+                param[i][2] = rs.getString(1);
+                param[i][3] = rs.getString( 5);       
+                i+=1;         
+            }
+            System.out.println("connected to parts DB...");
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(UserDB.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        System.out.println("getData ended...");
         return param;
     }
     
