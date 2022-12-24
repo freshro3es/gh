@@ -74,6 +74,20 @@ public class UserDB {
         return "0";
     }
     
+    public void setRole(String login, String role) {
+        try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
+            PreparedStatement pst = con.prepareStatement("UPDATE \"user\" SET role = ? WHERE email = ?")) {
+            pst.setString(1, role);
+            pst.setString(2, login);
+            pst.executeUpdate();
+            
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(UserDB.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+    
     public String[] getUser(String login) throws SQLException {
         String[] param = new String[5];
         String query = "SELECT * FROM \"user\" WHERE email = ?";

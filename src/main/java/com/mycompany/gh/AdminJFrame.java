@@ -8,6 +8,7 @@ import com.mycompany.gh.db.PartDB;
 import com.mycompany.gh.db.PartOrderDB;
 import com.mycompany.gh.db.UserDB;
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -20,7 +21,7 @@ public class AdminJFrame extends javax.swing.JFrame {
     
     private DefaultTableModel partTableModel;
     private DefaultTableModel partOrderTableModel;
-    private DefaultTableModel usersTableModel;
+    private DefaultTableModel usersTableModel = new DefaultTableModel();
     
     private static String name;
     private static String lastname;
@@ -610,8 +611,8 @@ public class AdminJFrame extends javax.swing.JFrame {
         UserDB useradd = new UserDB();
         Object[][] array = null;
         try {
-            array = useradd.getData(login);
             usersTableModel = new DefaultTableModel();
+            array = useradd.getData(login);
             Object[] columnsHeader = new String[] {"Имя", "Фамилия", "Логин", "Роль"};
             usersTableModel.setColumnIdentifiers(columnsHeader);
             for (int i = 0; i < array.length; i++)
@@ -622,7 +623,7 @@ public class AdminJFrame extends javax.swing.JFrame {
         }
     }
     
-    private void updateOrder() {
+    protected void updateOrder() {
         PartOrderDB parts = new PartOrderDB();
         Object[][] array = null;
         try {
@@ -725,7 +726,8 @@ public class AdminJFrame extends javax.swing.JFrame {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    new AddPartOrderJFrame().setVisible(true);
+                   AddPartOrderJFrame addPart = new AddPartOrderJFrame();
+                   addPart.setVisible(true);
                 }
             });
             updateOrder();
@@ -778,9 +780,11 @@ public class AdminJFrame extends javax.swing.JFrame {
     private void saveUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveUsersButtonActionPerformed
         // TODO add your handling code here:
         if (evt.getSource()==saveUsersButton) {
+            int idx = usersTable.getSelectedRow();
             String login = loginAdminField.getText();
             String role = roleAdminField.getText();
-            
+            usersTableModel.setValueAt(role, idx, 3);
+            new UserDB().setRole(login, role);
         }
     }//GEN-LAST:event_saveUsersButtonActionPerformed
 

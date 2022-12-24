@@ -11,7 +11,7 @@ import com.mycompany.gh.db.PartOrderDB;
  * @author Игорь
  */
 public class AddPartOrderJFrame extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form AddPartJForm
      */
