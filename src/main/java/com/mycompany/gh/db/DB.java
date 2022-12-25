@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class OrderDB {
+public class DB {
     
     private String url = "jdbc:postgresql://localhost:4572/hg";
     private String user = "postgres";
@@ -204,3 +204,4 @@ public class OrderDB {
         return array;
     }
 }
+

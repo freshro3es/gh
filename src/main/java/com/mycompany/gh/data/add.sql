@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS "user"
 CREATE TABLE IF NOT EXISTS "order"
 (
     order_id serial NOT NULL,
+    login varchar(50) NOT NULL,
     name varchar(50) NOT NULL,
     lastname varchar(50) NOT NULL,
     phone varchar(50) NOT NULL,

@@ -29,6 +29,8 @@ public class ClientJFrame extends javax.swing.JFrame {
     private DefaultComboBoxModel workTypemodel;
     private DefaultComboBoxModel workModel;
     private DefaultTableModel workTableModel = new DefaultTableModel();
+    private DefaultTableModel orderListModel;
+    private DefaultTableModel workListModel;
 
     /**
      * Creates new form ClientJFrame
@@ -74,11 +76,18 @@ public class ClientJFrame extends javax.swing.JFrame {
         workBox = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         workTable = new javax.swing.JTable();
-        jLabel8 = new javax.swing.JLabel();
+        newRequestLabel = new javax.swing.JLabel();
         addWorkButton = new javax.swing.JButton();
         deleteWorkButton = new javax.swing.JButton();
         requestSendButton = new javax.swing.JButton();
         order = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        orderListTable = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        workListTable = new javax.swing.JTable();
+        requestListLabel = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         nameField = new javax.swing.JTextField();
@@ -157,14 +166,14 @@ public class ClientJFrame extends javax.swing.JFrame {
                         .addComponent(guaranteesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tonAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(expertMechanicsLabel))
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
         mainLayout.setVerticalGroup(
             mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(tonAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(marketYearsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(guaranteesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -175,9 +184,19 @@ public class ClientJFrame extends javax.swing.JFrame {
 
         profile.addTab("Главная", main);
 
+        request.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                requestMouseExited(evt);
+            }
+        });
+
+        nameRequestField.setEditable(false);
+
         jLabel1.setText("Имя");
 
         jLabel3.setText("Фамилия");
+
+        lastnameRequestField.setEditable(false);
 
         phoneRequestLabel.setText("Номер телефона");
 
@@ -218,9 +237,9 @@ public class ClientJFrame extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(workTable);
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Новая заявка");
+        newRequestLabel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        newRequestLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        newRequestLabel.setText("Новая заявка");
 
         addWorkButton.setText("Добавить");
         addWorkButton.addActionListener(new java.awt.event.ActionListener() {
@@ -273,9 +292,9 @@ public class ClientJFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(requestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(newRequestLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestLayout.createSequentialGroup()
-                        .addGap(0, 103, Short.MAX_VALUE)
+                        .addGap(0, 91, Short.MAX_VALUE)
                         .addGroup(requestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestLayout.createSequentialGroup()
                                 .addComponent(requestSendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -290,7 +309,7 @@ public class ClientJFrame extends javax.swing.JFrame {
             requestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(requestLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(newRequestLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(requestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(requestLayout.createSequentialGroup()
@@ -325,20 +344,102 @@ public class ClientJFrame extends javax.swing.JFrame {
                 .addGroup(requestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteWorkButton)
                     .addComponent(requestSendButton))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         profile.addTab("Оставить заявку", request);
+
+        orderListTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "№ заказа", "Статус"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        orderListTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                orderListTableMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(orderListTable);
+
+        workListTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Название работы", "Длительность", "Статус", "Стоимость"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(workListTable);
+
+        requestListLabel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        requestListLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        requestListLabel.setText("Ваши заказы");
+
+        jLabel4.setText("Весь список");
+
+        jLabel5.setText("Выбранный заказ");
 
         javax.swing.GroupLayout orderLayout = new javax.swing.GroupLayout(order);
         order.setLayout(orderLayout);
         orderLayout.setHorizontalGroup(
             orderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 788, Short.MAX_VALUE)
+            .addGroup(orderLayout.createSequentialGroup()
+                .addGroup(orderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(requestListLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(orderLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(orderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(orderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         orderLayout.setVerticalGroup(
             orderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 512, Short.MAX_VALUE)
+            .addGroup(orderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(requestListLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(orderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(orderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         profile.addTab("Ваш заказ", order);
@@ -370,7 +471,7 @@ public class ClientJFrame extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(242, Short.MAX_VALUE)
+                .addContainerGap(230, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(passwordField)
@@ -415,7 +516,7 @@ public class ClientJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveProfileButton)
                     .addComponent(quitProfileButton))
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
@@ -450,11 +551,17 @@ public class ClientJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(profile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 903, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(profile, javax.swing.GroupLayout.DEFAULT_SIZE, 891, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(profile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(profile, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -462,11 +569,28 @@ public class ClientJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     
-    private void updateWorkType() {
-        OrderDB order = new OrderDB();
-        Object[] array = null;
+    private void updateOrderList() {
         try {
-            array = order.getWorkType();
+            int n = new OrderDB().count(new String[] {login}, "SELECT count(*) FROM \"order\" WHERE login=?");
+            Object[][] array = new OrderDB().getList(n, 2, new String[] {login}, 
+                    "SELECT order_id, status " +
+                    "FROM \"order\"" +
+                    "WHERE login=?");
+            orderListModel = new DefaultTableModel();
+            Object[] columnsHeader = new String[] {"№ заказа", "Статус"};
+            orderListModel.setColumnIdentifiers(columnsHeader);
+            for (int i = 0; i < array.length; i++)
+                orderListModel.addRow(array[i]);
+            orderListTable.setModel(orderListModel);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void updateWorkType() {
+        try {
+            int n = new OrderDB().count("select count(*) from work_type");
+            Object[] array = new OrderDB().getColumn(n, "SELECT work_type_name FROM work_type");
             workTypemodel = new DefaultComboBoxModel();
             for (int i = 0; i < array.length; i++)
                 workTypemodel.addElement(array[i]);
@@ -477,12 +601,12 @@ public class ClientJFrame extends javax.swing.JFrame {
     }
     
     
-    private void updateWork(String type) {
-        OrderDB order = new OrderDB();
-        Object[] array = null;
-        
+    private void updateWork(String[] param) {
         try {
-            array = order.getWork(type);
+            int n = new OrderDB().count(param, "SELECT count(*) FROM \"work\""
+                + "INNER JOIN work_type ON \"work\".work_type_id=work_type.work_type_id WHERE work_type_name=?");
+            Object[] array = new OrderDB().getColumn(n, param, "SELECT work_name FROM \"work\""
+                + "INNER JOIN work_type ON \"work\".work_type_id=work_type.work_type_id WHERE work_type_name=?");
             workModel = new DefaultComboBoxModel();
             for (int i = 0; i < array.length; i++)
                 workModel.addElement(array[i]);
@@ -509,6 +633,7 @@ public class ClientJFrame extends javax.swing.JFrame {
         lastnameRequestField.setText(lastname);
         
         updateWorkType();
+        updateOrderList();
     }//GEN-LAST:event_formWindowOpened
 
     private void saveProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProfileButtonActionPerformed
@@ -536,17 +661,18 @@ public class ClientJFrame extends javax.swing.JFrame {
     private void workTypeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workTypeBoxActionPerformed
         // TODO add your handling code here:
         String param = (String) workTypeBox.getSelectedItem();
-        updateWork(param);
+        updateWork(new String[] {param});
     }//GEN-LAST:event_workTypeBoxActionPerformed
 
     private void addWorkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWorkButtonActionPerformed
         // TODO add your handling code here:
         Object[] array = null;
-        String type, work;
-        type = (String) workTypeBox.getSelectedItem();
-        work = (String) workBox.getSelectedItem();
+        String[] param = new String[] {(String) workTypeBox.getSelectedItem(), (String) workBox.getSelectedItem()};
+        String query = "SELECT work_type_name, work_name, execution_duration, work_cost "
+                        + "FROM \"work\" INNER JOIN work_type ON "
+                        + "\"work\".work_type_id=work_type.work_type_id WHERE work_type_name=? and work_name=?";
         try {
-            array = new OrderDB().getWorkTable(type, work);
+            array = new OrderDB().getRow(4, param, query);
         } catch (SQLException ex) {
             Logger.getLogger(ClientJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -561,30 +687,66 @@ public class ClientJFrame extends javax.swing.JFrame {
 
     private void requestSendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestSendButtonActionPerformed
         // TODO add your handling code here:
-        String name = nameRequestField.getText();
-        String lastname = lastnameRequestField.getText();
-        String phone = phoneRequestField.getText();
-        String email = emailRequestField.getText();
-        String status = "request";
-        int orderId = new OrderDB().setOrder(name, lastname, phone, email, status);
-        String[] type;
-        Object[] array = new Object[workTableModel.getColumnCount()];
+        String[] param = new String[] {login, nameRequestField.getText(), lastnameRequestField.getText(),
+        phoneRequestField.getText(), emailRequestField.getText()};
         
-        Vector<Vector> param = new Vector<Vector>();
-        param = workTableModel.getDataVector();
+        new OrderDB().setRow(param, "INSERT INTO \"order\"(login, name, lastname, phone, email, status) VALUES(?, ?, ?, ?, ?, 'Заявка')");
+        int orderId = new OrderDB().getItem(new String[] {login}, "SELECT MAX(order_id) FROM \"order\" "
+                + "WHERE login=? AND status='Заявка'");
+        
+        Object[] array = new Object[workTableModel.getColumnCount()];
+        Vector<Vector> vector = new Vector<Vector>();
+        vector = workTableModel.getDataVector();
+        
         for (int i = 0; i < workTableModel.getRowCount(); i++) {
             for (int j = 0; j < workTableModel.getColumnCount(); j++) {
-                array[j] = param.elementAt(i).elementAt(j);
-                System.out.println(array[j].toString());
+                array[j] = vector.elementAt(i).elementAt(j);
             }
-            try {
-                new OrderDB().setOrderWork(array[1].toString(),orderId);
-            } catch (SQLException ex) {
-                Logger.getLogger(ClientJFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            int workId = new OrderDB().getItem(new String[] {array[1].toString()}, "SELECT work_id FROM work WHERE work_name=?");
+            new OrderDB().setRow(new int[] {orderId, workId}, "INSERT INTO order_work (order_id, work_id, status)\n" +
+                    "VALUES (?, ?, 'Не выполнена')");
         }
-        
+        newRequestLabel.setText("Заявка отправлена!");
     }//GEN-LAST:event_requestSendButtonActionPerformed
+
+    private void requestMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestMouseExited
+        // TODO add your handling code here:
+        newRequestLabel.setText("Новая заявка");
+        updateOrderList();
+    }//GEN-LAST:event_requestMouseExited
+
+    private void orderListTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderListTableMouseClicked
+        // TODO add your handling code here:
+        int idx = orderListTable.getSelectedRow();
+        Vector<Vector> vector = orderListModel.getDataVector();
+        int orderId = Integer.parseInt(vector.elementAt(idx).elementAt(0).toString());
+        System.out.println(orderId);
+        try {
+            String query = "SELECT count(*)\n" +
+                           "FROM order_work INNER JOIN work ON order_work.work_id=work.work_id\n" +
+                           "WHERE order_id=?";
+            int n = new OrderDB().count(new int[] {orderId}, query);
+            System.out.println(n);
+            query = "SELECT work_name, execution_duration, status, work_cost\n" +
+                    "FROM order_work INNER JOIN work ON order_work.work_id=work.work_id\n" +
+                    "WHERE order_id=?";
+            Object[][] array = new OrderDB().getList(n, 4, new int[] {orderId}, query);
+            workListModel = new DefaultTableModel();
+            Object[] columnsHeader = new String[] {"Название работы", "Длительность", "Статус", "Стоимость"};
+            workListModel.setColumnIdentifiers(columnsHeader);
+            for (int i = 0; i < array.length; i++) {
+                for (int j=0; j<array[i].length; j++) {
+                    System.out.println(array[i][j]);
+                }   
+                workListModel.addRow(array[i]);
+            }
+                
+            workListTable.setModel(workListModel);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_orderListTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -631,13 +793,16 @@ public class ClientJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField lastnameField;
     private javax.swing.JLabel lastnameLabel;
@@ -649,7 +814,9 @@ public class ClientJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameRequestField;
+    private javax.swing.JLabel newRequestLabel;
     private javax.swing.JPanel order;
+    private javax.swing.JTable orderListTable;
     private javax.swing.JTextField passwordField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JTextField phoneRequestField;
@@ -657,10 +824,12 @@ public class ClientJFrame extends javax.swing.JFrame {
     private javax.swing.JTabbedPane profile;
     private javax.swing.JButton quitProfileButton;
     private javax.swing.JPanel request;
+    private javax.swing.JLabel requestListLabel;
     private javax.swing.JButton requestSendButton;
     private javax.swing.JButton saveProfileButton;
     private javax.swing.JLabel tonAuto;
     private javax.swing.JComboBox<String> workBox;
+    private javax.swing.JTable workListTable;
     private javax.swing.JTable workTable;
     private javax.swing.JComboBox<String> workTypeBox;
     // End of variables declaration//GEN-END:variables
