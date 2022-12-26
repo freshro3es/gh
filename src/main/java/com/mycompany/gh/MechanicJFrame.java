@@ -53,8 +53,8 @@ public class MechanicJFrame extends javax.swing.JFrame {
         tonAuto = new javax.swing.JLabel();
         expertMechanicsLabel = new javax.swing.JTextArea();
         marketYearsLabel = new javax.swing.JTextArea();
-        currentOrder = new javax.swing.JPanel();
         orders = new javax.swing.JPanel();
+        newRequestsLabel = new javax.swing.JLabel();
         partsDB = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         partsTable = new javax.swing.JTable();
@@ -146,28 +146,24 @@ public class MechanicJFrame extends javax.swing.JFrame {
 
         profile.addTab("Главная", main);
 
-        javax.swing.GroupLayout currentOrderLayout = new javax.swing.GroupLayout(currentOrder);
-        currentOrder.setLayout(currentOrderLayout);
-        currentOrderLayout.setHorizontalGroup(
-            currentOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 797, Short.MAX_VALUE)
-        );
-        currentOrderLayout.setVerticalGroup(
-            currentOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 512, Short.MAX_VALUE)
-        );
-
-        profile.addTab("Текущий", currentOrder);
+        newRequestsLabel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        newRequestsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        newRequestsLabel.setText("Новые записи");
 
         javax.swing.GroupLayout ordersLayout = new javax.swing.GroupLayout(orders);
         orders.setLayout(ordersLayout);
         ordersLayout.setHorizontalGroup(
             ordersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 797, Short.MAX_VALUE)
+            .addGroup(ordersLayout.createSequentialGroup()
+                .addComponent(newRequestsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
+                .addContainerGap())
         );
         ordersLayout.setVerticalGroup(
             ordersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 512, Short.MAX_VALUE)
+            .addGroup(ordersLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(newRequestsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(461, Short.MAX_VALUE))
         );
 
         profile.addTab("Заказы", orders);
@@ -516,7 +512,6 @@ public class MechanicJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPartButton;
-    private javax.swing.JPanel currentOrder;
     private javax.swing.JButton deleteButton;
     private javax.swing.JTextArea expertMechanicsLabel;
     private javax.swing.JTextArea guaranteesLabel;
@@ -533,6 +528,7 @@ public class MechanicJFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea marketYearsLabel;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel newRequestsLabel;
     private javax.swing.JPanel orders;
     private javax.swing.JPanel partsDB;
     private javax.swing.JTable partsTable;

@@ -4,7 +4,7 @@
  */
 package com.mycompany.gh;
 
-import com.mycompany.gh.db.OrderDB;
+import com.mycompany.gh.db.DataBase;
 import com.mycompany.gh.db.UserDB;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -267,7 +267,7 @@ public class ClientJFrame extends javax.swing.JFrame {
         requestLayout.setHorizontalGroup(
             requestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 184, Short.MAX_VALUE)
                 .addGroup(requestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestLayout.createSequentialGroup()
                         .addGroup(requestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -571,11 +571,16 @@ public class ClientJFrame extends javax.swing.JFrame {
     
     private void updateOrderList() {
         try {
-            int n = new OrderDB().count(new String[] {login}, "SELECT count(*) FROM \"order\" WHERE login=?");
-            Object[][] array = new OrderDB().getList(n, 2, new String[] {login}, 
-                    "SELECT order_id, status " +
-                    "FROM \"order\"" +
-                    "WHERE login=?");
+            int n = new DataBase().count(
+                    new String[] {login}, 
+                    "SELECT count(*) FROM \"order\" WHERE login=?"
+            );
+            Object[][] array = new DataBase().getList(
+                    n, 
+                    2, 
+                    new String[] {login}, 
+                    "SELECT order_id, status FROM \"order\" WHERE login=?"
+            );
             orderListModel = new DefaultTableModel();
             Object[] columnsHeader = new String[] {"№ заказа", "Статус"};
             orderListModel.setColumnIdentifiers(columnsHeader);
@@ -589,8 +594,8 @@ public class ClientJFrame extends javax.swing.JFrame {
     
     private void updateWorkType() {
         try {
-            int n = new OrderDB().count("select count(*) from work_type");
-            Object[] array = new OrderDB().getColumn(n, "SELECT work_type_name FROM work_type");
+            int n = new DataBase().count("select count(*) from work_type");
+            Object[] array = new DataBase().getColumn(n, "SELECT work_type_name FROM work_type");
             workTypemodel = new DefaultComboBoxModel();
             for (int i = 0; i < array.length; i++)
                 workTypemodel.addElement(array[i]);
@@ -603,9 +608,9 @@ public class ClientJFrame extends javax.swing.JFrame {
     
     private void updateWork(String[] param) {
         try {
-            int n = new OrderDB().count(param, "SELECT count(*) FROM \"work\""
+            int n = new DataBase().count(param, "SELECT count(*) FROM \"work\""
                 + "INNER JOIN work_type ON \"work\".work_type_id=work_type.work_type_id WHERE work_type_name=?");
-            Object[] array = new OrderDB().getColumn(n, param, "SELECT work_name FROM \"work\""
+            Object[] array = new DataBase().getColumn(n, param, "SELECT work_name FROM \"work\""
                 + "INNER JOIN work_type ON \"work\".work_type_id=work_type.work_type_id WHERE work_type_name=?");
             workModel = new DefaultComboBoxModel();
             for (int i = 0; i < array.length; i++)
@@ -672,7 +677,7 @@ public class ClientJFrame extends javax.swing.JFrame {
                         + "FROM \"work\" INNER JOIN work_type ON "
                         + "\"work\".work_type_id=work_type.work_type_id WHERE work_type_name=? and work_name=?";
         try {
-            array = new OrderDB().getRow(4, param, query);
+            array = new DataBase().getRow(4, param, query);
         } catch (SQLException ex) {
             Logger.getLogger(ClientJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -690,8 +695,8 @@ public class ClientJFrame extends javax.swing.JFrame {
         String[] param = new String[] {login, nameRequestField.getText(), lastnameRequestField.getText(),
         phoneRequestField.getText(), emailRequestField.getText()};
         
-        new OrderDB().setRow(param, "INSERT INTO \"order\"(login, name, lastname, phone, email, status) VALUES(?, ?, ?, ?, ?, 'Заявка')");
-        int orderId = new OrderDB().getItem(new String[] {login}, "SELECT MAX(order_id) FROM \"order\" "
+        new DataBase().setRow(param, "INSERT INTO \"order\"(login, name, lastname, phone, email, status) VALUES(?, ?, ?, ?, ?, 'Заявка')");
+        int orderId = new DataBase().getItem(new String[] {login}, "SELECT MAX(order_id) FROM \"order\" "
                 + "WHERE login=? AND status='Заявка'");
         
         Object[] array = new Object[workTableModel.getColumnCount()];
@@ -702,8 +707,8 @@ public class ClientJFrame extends javax.swing.JFrame {
             for (int j = 0; j < workTableModel.getColumnCount(); j++) {
                 array[j] = vector.elementAt(i).elementAt(j);
             }
-            int workId = new OrderDB().getItem(new String[] {array[1].toString()}, "SELECT work_id FROM work WHERE work_name=?");
-            new OrderDB().setRow(new int[] {orderId, workId}, "INSERT INTO order_work (order_id, work_id, status)\n" +
+            int workId = new DataBase().getItem(new String[] {array[1].toString()}, "SELECT work_id FROM work WHERE work_name=?");
+            new DataBase().setRow(new int[] {orderId, workId}, "INSERT INTO order_work (order_id, work_id, status)\n" +
                     "VALUES (?, ?, 'Не выполнена')");
         }
         newRequestLabel.setText("Заявка отправлена!");
@@ -725,12 +730,12 @@ public class ClientJFrame extends javax.swing.JFrame {
             String query = "SELECT count(*)\n" +
                            "FROM order_work INNER JOIN work ON order_work.work_id=work.work_id\n" +
                            "WHERE order_id=?";
-            int n = new OrderDB().count(new int[] {orderId}, query);
+            int n = new DataBase().count(new int[] {orderId}, query);
             System.out.println(n);
             query = "SELECT work_name, execution_duration, status, work_cost\n" +
                     "FROM order_work INNER JOIN work ON order_work.work_id=work.work_id\n" +
                     "WHERE order_id=?";
-            Object[][] array = new OrderDB().getList(n, 4, new int[] {orderId}, query);
+            Object[][] array = new DataBase().getList(n, 4, new int[] {orderId}, query);
             workListModel = new DefaultTableModel();
             Object[] columnsHeader = new String[] {"Название работы", "Длительность", "Статус", "Стоимость"};
             workListModel.setColumnIdentifiers(columnsHeader);
@@ -739,8 +744,7 @@ public class ClientJFrame extends javax.swing.JFrame {
                     System.out.println(array[i][j]);
                 }   
                 workListModel.addRow(array[i]);
-            }
-                
+            }    
             workListTable.setModel(workListModel);
             
         } catch (SQLException ex) {

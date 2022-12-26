@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class OrderDB {
+public class DataBase {
     
     private String url = "jdbc:postgresql://localhost:4572/hg";
     private String user = "postgres";
@@ -121,6 +121,25 @@ public class OrderDB {
         return array;
     }
     
+    public String[] getRow(int size, int[] param, String query) throws SQLException {
+        String[] array = new String[size];
+        try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
+            PreparedStatement pst = con.prepareStatement(query)) {
+            for (int i=0; i<param.length; i++) {
+                pst.setInt(i+1, param[i]);
+            }
+            ResultSet rs = pst.executeQuery(); 
+            rs.next();
+            for (int i=0; i<size; i++) {
+                array[i] = rs.getString(i+1);
+            }
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(UserDB.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return array;
+    }
+    
     public void setRow(String[] param, String query) {
         try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
             PreparedStatement pst = con.prepareStatement(query)) {
@@ -164,6 +183,25 @@ public class OrderDB {
         }
     }
     
+    public String[][] getList(int sizex, int sizey, String query) throws SQLException {
+        String[][] array = new String[sizex][sizey];   
+        try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
+            PreparedStatement pst = con.prepareStatement(query)) {
+            ResultSet rs = pst.executeQuery();
+            for (int i=0; i<sizex; i++) {
+                rs.next();
+                for (int j=0; j<sizey; j++) {
+                    array[i][j] = rs.getString(j+1);
+                }
+            }
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(UserDB.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return array;
+    }
+    
     public String[][] getList(int sizex, int sizey, int[] param, String query) throws SQLException {
         String[][] array = new String[sizex][sizey];   
         try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
@@ -185,10 +223,12 @@ public class OrderDB {
     }
     
     public String[][] getList(int sizex, int sizey, String[] param, String query) throws SQLException {
-        String[][] array = new String[sizex][2];   
+        String[][] array = new String[sizex][sizey];   
         try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
             PreparedStatement pst = con.prepareStatement(query)) {
-            pst.setString(1, param[0]);
+            for (int i=0; i<param.length; i++) {
+                pst.setString(i+1, param[i]);
+            }
             ResultSet rs = pst.executeQuery();
             for (int i=0; i<sizex; i++) {
                 rs.next();
@@ -202,5 +242,35 @@ public class OrderDB {
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
         return array;
+    }
+    
+    public void delete(String[] param, String query) {
+        System.out.println("deleteData started...");
+        try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
+            PreparedStatement pst = con.prepareStatement(query)) {
+            for (int i=0; i<param.length; i++) {
+                pst.setString(i+1, param[i]);
+            }
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(UserDB.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        System.out.println("deleteData ended...");
+    }
+    
+    public void delete(int[] param, String query) {
+        System.out.println("deleteData started...");
+        try (Connection con = DriverManager.getConnection(this.url, this.user, this.password);
+            PreparedStatement pst = con.prepareStatement(query)) {
+            for (int i=0; i<param.length; i++) {
+                pst.setInt(i+1, param[i]);
+            }
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(UserDB.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        System.out.println("deleteData ended...");
     }
 }

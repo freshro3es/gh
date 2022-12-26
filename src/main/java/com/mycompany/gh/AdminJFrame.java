@@ -1,26 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.gh;
 
+import com.mycompany.gh.db.DataBase;
 import com.mycompany.gh.db.PartDB;
 import com.mycompany.gh.db.PartOrderDB;
 import com.mycompany.gh.db.UserDB;
 import java.sql.SQLException;
-import java.util.concurrent.TimeUnit;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Игорь
- */
 public class AdminJFrame extends javax.swing.JFrame {
     
+    DataBase dataBase = new DataBase();
+    
+    private DefaultComboBoxModel workTypemodel;
+    private DefaultComboBoxModel workModel;
+    private DefaultTableModel workTableModel = new DefaultTableModel();
     private DefaultTableModel partTableModel;
     private DefaultTableModel partOrderTableModel;
+    private DefaultTableModel requestListModel;
     private DefaultTableModel usersTableModel = new DefaultTableModel();
     
     private static String name;
@@ -28,6 +28,8 @@ public class AdminJFrame extends javax.swing.JFrame {
     private static String login;
     private static String password;
     private static String role;
+    
+    private static int requestIdx;
 
     /**
      * Creates new form mainJFrame
@@ -57,6 +59,18 @@ public class AdminJFrame extends javax.swing.JFrame {
         marketYearsLabel = new javax.swing.JTextArea();
         guaranteesLabel = new javax.swing.JTextArea();
         newRecords = new javax.swing.JPanel();
+        newRequestsLabel = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        requestListTable = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        workTable = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        workTypeBox = new javax.swing.JComboBox<>();
+        workBox = new javax.swing.JComboBox<>();
+        addWorkButton = new javax.swing.JButton();
+        orderCreateButton = new javax.swing.JButton();
+        deleteWorkButton = new javax.swing.JButton();
         partsOrder = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         partsOrderTable = new javax.swing.JTable();
@@ -168,15 +182,151 @@ public class AdminJFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Главная", main);
 
+        newRecords.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                newRecordsMouseExited(evt);
+            }
+        });
+
+        newRequestsLabel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        newRequestsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        newRequestsLabel.setText("Новые записи");
+
+        requestListTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "№ заказа", "Имя", "Фамилия", "Телефон", "Email"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        requestListTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                requestListTableMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(requestListTable);
+
+        workTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Тип работы", "Работа", "Длительность", "Стоимость"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(workTable);
+
+        jLabel6.setText("Тип работы");
+
+        jLabel7.setText("Работа");
+
+        workTypeBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                workTypeBoxActionPerformed(evt);
+            }
+        });
+
+        addWorkButton.setText("Добавить");
+        addWorkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addWorkButtonActionPerformed(evt);
+            }
+        });
+
+        orderCreateButton.setText("Создать заказ");
+        orderCreateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderCreateButtonActionPerformed(evt);
+            }
+        });
+
+        deleteWorkButton.setText("Удалить выделенное");
+        deleteWorkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteWorkButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout newRecordsLayout = new javax.swing.GroupLayout(newRecords);
         newRecords.setLayout(newRecordsLayout);
         newRecordsLayout.setHorizontalGroup(
             newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 793, Short.MAX_VALUE)
+            .addGroup(newRecordsLayout.createSequentialGroup()
+                .addGroup(newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(newRecordsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(newRequestsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(newRecordsLayout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addGroup(newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane4)
+                            .addComponent(jScrollPane5)
+                            .addGroup(newRecordsLayout.createSequentialGroup()
+                                .addGroup(newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(workTypeBox, 0, 269, Short.MAX_VALUE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(workBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(addWorkButton, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(newRecordsLayout.createSequentialGroup()
+                .addContainerGap(252, Short.MAX_VALUE)
+                .addComponent(orderCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(deleteWorkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(221, 221, 221))
         );
         newRecordsLayout.setVerticalGroup(
             newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 512, Short.MAX_VALUE)
+            .addGroup(newRecordsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(newRequestsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(workTypeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(workBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addWorkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(newRecordsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deleteWorkButton)
+                    .addComponent(orderCreateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Новые записи", newRecords);
@@ -594,11 +744,22 @@ public class AdminJFrame extends javax.swing.JFrame {
     
     //Функции класса
     private void updateUsers() {
-        UserDB useradd = new UserDB();
-        Object[][] array = null;
         try {
             usersTableModel = new DefaultTableModel();
-            array = useradd.getData(login);
+            int n = dataBase.count(
+                    new String[] {login}, 
+                    "SELECT count(*) " + 
+                    "FROM \"user\" " + 
+                    "WHERE email != ?"
+            );
+            Object[][] array = dataBase.getList(
+                    n, 
+                    4, 
+                    new String[] {login}, 
+                    "SELECT name, lastname, email, role " + 
+                    "FROM \"user\" " + 
+                    "WHERE email != ?"
+            );
             Object[] columnsHeader = new String[] {"Имя", "Фамилия", "Логин", "Роль"};
             usersTableModel.setColumnIdentifiers(columnsHeader);
             for (int i = 0; i < array.length; i++)
@@ -663,6 +824,65 @@ public class AdminJFrame extends javax.swing.JFrame {
         PartDB parts = new PartDB();
         parts.deleteData(param);
      }
+     
+     private void updateWork(String[] param) {
+        try {
+            int n = new DataBase().count(
+                    param, 
+                    "SELECT count(*) " + 
+                    "FROM \"work\" INNER JOIN work_type ON \"work\".work_type_id=work_type.work_type_id " + 
+                    "WHERE work_type_name=?"
+            );
+            Object[] array = new DataBase().getColumn(
+                    n, 
+                    param, 
+                    "SELECT work_name " + 
+                    "FROM \"work\" INNER JOIN work_type ON \"work\".work_type_id=work_type.work_type_id " +
+                    "WHERE work_type_name=?"
+            );
+            workModel = new DefaultComboBoxModel();
+            for (int i = 0; i < array.length; i++)
+                workModel.addElement(array[i]);
+            workBox.setModel(workModel);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+    private void updateWorkType() {
+        try {
+            int n = new DataBase().count("select count(*) from work_type");
+            Object[] array = new DataBase().getColumn(n, "SELECT work_type_name FROM work_type");
+            workTypemodel = new DefaultComboBoxModel();
+            for (int i = 0; i < array.length; i++)
+                workTypemodel.addElement(array[i]);
+            workTypeBox.setModel(workTypemodel);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+     private void updateRequestList() {
+        try {
+            int n = new DataBase().count(
+                    "SELECT count(*) FROM \"order\""
+            );
+            Object[][] array = new DataBase().getList(
+                    n, 
+                    6,  
+                    "SELECT order_id, name, lastname, phone, email, status " + 
+                    "FROM \"order\" " 
+            );
+            requestListModel = new DefaultTableModel();
+            Object[] columnsHeader = new String[] {"№ заказа", "Имя", "Фамилия", "Телефон", "Email", "Статус"};
+            requestListModel.setColumnIdentifiers(columnsHeader);
+            for (int i = 0; i < array.length; i++)
+                requestListModel.addRow(array[i]);
+            requestListTable.setModel(requestListModel);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
@@ -674,6 +894,8 @@ public class AdminJFrame extends javax.swing.JFrame {
         updateUsers();
         updateOrder();
         updatePart();
+        updateRequestList();
+        updateWorkType();
     }//GEN-LAST:event_formWindowOpened
 
     private void quitProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitProfileButtonActionPerformed
@@ -692,9 +914,18 @@ public class AdminJFrame extends javax.swing.JFrame {
     private void saveProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProfileButtonActionPerformed
         // TODO add your handling code here:
         if (evt.getSource()==saveProfileButton) {
-            new UserDB().delete(login);
-            new UserDB().add(nameField.getText(), lastnameField.getText(),
-                loginField.getText(), passwordField.getText(), role);
+            dataBase.delete(
+                    new String[] {login}, 
+                    "DELETE FROM \"user\"" + 
+                    "WHERE email=?"
+            );
+            dataBase.setRow(
+                    new String[] {nameField.getText(), lastnameField.getText(), loginField.getText(), passwordField.getText(), role}, 
+                    "INSERT INTO \"user\"(name, lastname, email, password, role)" + 
+                    "VALUES(?, ?, ?, ?, ?)"
+            );
+//            new UserDB().add(nameField.getText(), lastnameField.getText(),
+//                loginField.getText(), passwordField.getText(), role);
         }
     }//GEN-LAST:event_saveProfileButtonActionPerformed
 
@@ -782,6 +1013,123 @@ public class AdminJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_deleteOrderButtonActionPerformed
 
+    private void workTypeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workTypeBoxActionPerformed
+        // TODO add your handling code here:
+        String param = (String) workTypeBox.getSelectedItem();
+        updateWork(new String[] {param});
+    }//GEN-LAST:event_workTypeBoxActionPerformed
+
+    private void addWorkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWorkButtonActionPerformed
+        // TODO add your handling code here:
+        Object[] array = null;
+        String[] param = new String[] {(String) workTypeBox.getSelectedItem(), (String) workBox.getSelectedItem()};
+        String query = "SELECT work_type_name, work_name, execution_duration, work_cost "
+        + "FROM \"work\" INNER JOIN work_type ON "
+        + "\"work\".work_type_id=work_type.work_type_id WHERE work_type_name=? and work_name=?";
+        try {
+            array = new DataBase().getRow(4, param, query);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        workTableModel.addRow(array);
+    }//GEN-LAST:event_addWorkButtonActionPerformed
+
+    private void requestListTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestListTableMouseClicked
+        // TODO add your handling code here:
+        int idx = requestListTable.getSelectedRow();
+        requestIdx = requestListTable.getSelectedRow();
+        System.out.println(idx);
+        Vector<Vector> vector = requestListModel.getDataVector();
+        int orderId = Integer.parseInt(vector.elementAt(idx).elementAt(0).toString());
+        System.out.println(orderId);
+        try {
+            String query = "SELECT count(*)\n" +
+                           "FROM order_work INNER JOIN work ON order_work.work_id=work.work_id\n" +
+                           "WHERE order_id=?";
+            int n = new DataBase().count(new int[] {orderId}, query);
+            System.out.println(n);
+            query = "SELECT work_type_name, work_name, execution_duration, work_cost " +
+                    "FROM order_work INNER JOIN work ON order_work.work_id=work.work_id " + 
+                    "INNER JOIN work_type ON work.work_type_id=work_type.work_type_id " +
+                    "WHERE order_id=?";
+            Object[][] array = new DataBase().getList(n, 4, new int[] {orderId}, query);
+            workTableModel = new DefaultTableModel();
+            Object[] columnsHeader = new String[] {"Тип работы", "Работа", "Длительность", "Стоимость"};
+            workTableModel.setColumnIdentifiers(columnsHeader);
+            for (int i = 0; i < array.length; i++) {
+                for (int j=0; j<array[i].length; j++) {
+                    System.out.println(array[i][j]);
+                }   
+                workTableModel.addRow(array[i]);
+            }    
+            workTable.setModel(workTableModel);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_requestListTableMouseClicked
+
+    private void deleteWorkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteWorkButtonActionPerformed
+        // TODO add your handling code here:
+        int idx = workTable.getSelectedRow();
+        workTableModel.removeRow(idx);
+    }//GEN-LAST:event_deleteWorkButtonActionPerformed
+
+    private void orderCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderCreateButtonActionPerformed
+        // TODO add your handling code here:
+        String[] param = null;
+        try {
+            param = dataBase.getRow(
+                    5,
+                    new int[] {requestIdx},
+                    "SELECT login, name, lastname, phone, email " +
+                    "FROM \"order\" " +
+                    "WHERE order_id=?"
+            );
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dataBase.delete(
+                new int[] {requestIdx}, 
+                "DELETE FROM \"order\" " + 
+                "WHERE order_id=? "
+        );
+        dataBase.delete(
+                new int[] {requestIdx}, 
+                "DELETE FROM order_work " + 
+                "WHERE order_id=? "
+        );
+        
+        new DataBase().setRow(
+                param, 
+                "INSERT INTO \"order\"(login, name, lastname, phone, email, status) " + 
+                "VALUES(?, ?, ?, ?, ?, 'Заказ')"
+        );
+        int orderId = new DataBase().getItem(
+                new String[] {param[0]}, 
+                "SELECT MAX(order_id) " + 
+                "FROM \"order\" " + 
+                "WHERE login=? AND status='Заказ'");
+        
+        Object[] array = new Object[workTableModel.getColumnCount()];
+        Vector<Vector> vector = workTableModel.getDataVector();
+        
+        for (int i = 0; i < workTableModel.getRowCount(); i++) {
+            for (int j = 0; j < workTableModel.getColumnCount(); j++) {
+                array[j] = vector.elementAt(i).elementAt(j);
+            }
+            int workId = new DataBase().getItem(new String[] {array[1].toString()}, "SELECT work_id FROM work WHERE work_name=?");
+            new DataBase().setRow(new int[] {orderId, workId}, "INSERT INTO order_work (order_id, work_id, status)\n" +
+                    "VALUES (?, ?, 'Не выполнена')");
+        }
+        newRequestsLabel.setText("Запись создана!");
+    }//GEN-LAST:event_orderCreateButtonActionPerformed
+
+    private void newRecordsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newRecordsMouseExited
+        // TODO add your handling code here:
+        newRequestsLabel.setText("Новые записи");
+        updateRequestList();
+    }//GEN-LAST:event_newRecordsMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -818,17 +1166,23 @@ public class AdminJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPartButton;
     private javax.swing.JButton addPartOrderButton;
+    private javax.swing.JButton addWorkButton;
     private javax.swing.JPanel adminPanel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton deleteOrderButton;
+    private javax.swing.JButton deleteWorkButton;
     private javax.swing.JTextArea expertMechanicsLabel;
     private javax.swing.JTextArea guaranteesLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField lastnameField;
     private javax.swing.JLabel lastnameLabel;
@@ -841,6 +1195,8 @@ public class AdminJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JPanel newRecords;
+    private javax.swing.JLabel newRequestsLabel;
+    private javax.swing.JButton orderCreateButton;
     private javax.swing.JLabel partOrderLabel;
     private javax.swing.JPanel partsDB;
     private javax.swing.JPanel partsOrder;
@@ -850,6 +1206,7 @@ public class AdminJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JPanel profile;
     private javax.swing.JButton quitProfileButton;
+    private javax.swing.JTable requestListTable;
     private javax.swing.JTextField roleAdminField;
     private javax.swing.JLabel roleAdminLabel;
     private javax.swing.JTextField roleField;
@@ -862,5 +1219,8 @@ public class AdminJFrame extends javax.swing.JFrame {
     private javax.swing.JButton updateUsersButton;
     private javax.swing.JLabel usersLabel;
     private javax.swing.JTable usersTable;
+    private javax.swing.JComboBox<String> workBox;
+    private javax.swing.JTable workTable;
+    private javax.swing.JComboBox<String> workTypeBox;
     // End of variables declaration//GEN-END:variables
 }

@@ -72,7 +72,7 @@ INSERT INTO "user" (email, password, name, lastname, role)
 VALUES  ('1111', '1111', 'Остап', 'Бендер', 'admin'),
         ('2222', '2222', 'Андрей', 'Алегров', 'mechanic'),
         ('3333', '3333', 'Сергей', 'Васильев', 'client'),
-        ('4444', '4444', 'Вова', 'Седой', 'admin');
+        ('4444', '4444', 'Вова', 'Седой', 'client');
 
 
 INSERT INTO part (id, name, type, price, amount, order_id)
