@@ -1077,7 +1077,7 @@ public class AdminJFrame extends javax.swing.JFrame {
     private void orderCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderCreateButtonActionPerformed
         // TODO add your handling code here:
         String[] param = null;
-        
+        requestIdx+=1;
         try {
             param = dataBase.getRow(
                     5,
