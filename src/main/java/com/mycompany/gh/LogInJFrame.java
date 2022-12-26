@@ -147,11 +147,11 @@ public class LogInJFrame extends javax.swing.JFrame {
         if (evt.getSource()==jButton1) {
             
             //получаю данные с введенных полей
-            String login = logInField.getText();
+            final String login = logInField.getText();
             String pswd = new String(passwordField.getPassword());
             
             //создаю новый экземпляр класса, работающего с таблицей "user", произвожу поиск аккаунта
-            UserDB useradd = new UserDB();
+            final UserDB useradd = new UserDB();
             String result = useradd.find(login, pswd);
             
             //обработка результата поиска аккаунта
