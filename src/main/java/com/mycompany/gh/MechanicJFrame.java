@@ -4,9 +4,11 @@
  */
 package com.mycompany.gh;
 
+import com.mycompany.gh.db.DataBase;
 import com.mycompany.gh.db.PartDB;
 import com.mycompany.gh.db.UserDB;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -18,13 +20,19 @@ import javax.swing.table.DefaultTableModel;
 public class MechanicJFrame extends javax.swing.JFrame {
     
     
-    DefaultTableModel partTableModel;
+    private DefaultTableModel partTableModel;
+    private DefaultTableModel requestListModel;
+    private DefaultTableModel workTableModel = new DefaultTableModel();
+    
+    DataBase dataBase = new DataBase();
     
     private static String name;
     private static String lastname;
     private static String login;
     private static String password;
     private static String role;
+    
+    private static int requestId;
 
     /**
      * Creates new form MechanicJFrame
@@ -55,6 +63,12 @@ public class MechanicJFrame extends javax.swing.JFrame {
         marketYearsLabel = new javax.swing.JTextArea();
         orders = new javax.swing.JPanel();
         newRequestsLabel = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        requestListTable = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        workTable = new javax.swing.JTable();
+        workDoneButton = new javax.swing.JButton();
+        orderDoneButton = new javax.swing.JButton();
         partsDB = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         partsTable = new javax.swing.JTable();
@@ -148,22 +162,112 @@ public class MechanicJFrame extends javax.swing.JFrame {
 
         newRequestsLabel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
         newRequestsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        newRequestsLabel.setText("Новые записи");
+        newRequestsLabel.setText("Активные заказы");
+
+        requestListTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "№ заказа", "Имя", "Фамилия", "Телефон", "Email"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        requestListTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                requestListTableMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(requestListTable);
+
+        workTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Тип работы", "Работа", "Длительность", "Стоимость"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        workTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                workTableMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(workTable);
+
+        workDoneButton.setText("Работа выполнена");
+        workDoneButton.setEnabled(false);
+        workDoneButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                workDoneButtonActionPerformed(evt);
+            }
+        });
+
+        orderDoneButton.setText("Заказ выполнен");
+        orderDoneButton.setEnabled(false);
+        orderDoneButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderDoneButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ordersLayout = new javax.swing.GroupLayout(orders);
         orders.setLayout(ordersLayout);
         ordersLayout.setHorizontalGroup(
             ordersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ordersLayout.createSequentialGroup()
-                .addComponent(newRequestsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
+                .addGroup(ordersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(newRequestsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
+                    .addGroup(ordersLayout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addGroup(ordersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(ordersLayout.createSequentialGroup()
+                .addGap(246, 246, 246)
+                .addComponent(workDoneButton)
+                .addGap(18, 18, 18)
+                .addComponent(orderDoneButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ordersLayout.setVerticalGroup(
             ordersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ordersLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(newRequestsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(461, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(ordersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(workDoneButton, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(orderDoneButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         profile.addTab("Заказы", orders);
@@ -394,25 +498,62 @@ public class MechanicJFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        // TODO add your handling code here:
-        if (evt.getSource()==updateButton) {
-            PartDB parts = new PartDB();
-            Object[][] array = null;
-            System.out.println("getting data...");
-            try {
-                array = parts.getData();
-            } catch (SQLException ex) {
-                Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            System.out.println("got data...");
+    
+    private void updateRequestList() {
+        try {
+            int n = new DataBase().count(
+                    "SELECT count(*) FROM \"order\" WHERE status = 'Заказ'"
+            );
+            Object[][] array = new DataBase().getList(
+                    n, 
+                    6,  
+                    "SELECT order_id, name, lastname, phone, email, status " + 
+                    "FROM \"order\" " + 
+                    "WHERE status = 'Заказ'" 
+            );
+            requestListModel = new DefaultTableModel();
+            Object[] columnsHeader = new String[] {"№ заказа", "Имя", "Фамилия", "Телефон", "Email", "Статус"};
+            requestListModel.setColumnIdentifiers(columnsHeader);
+            for (int i = 0; i < array.length; i++)
+                requestListModel.addRow(array[i]);
+            requestListTable.setModel(requestListModel);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void updatePart() {
+        PartDB parts = new PartDB();
+        Object[][] array = null;
+        try {
+            array = parts.getData();
             partTableModel = new DefaultTableModel();
             Object[] columnsHeader = new String[] {"Название", "Тип", "Цена", "Количество", "Заказ"};
             partTableModel.setColumnIdentifiers(columnsHeader);
-            for (int i = 0; i < array.length; i++)
-            partTableModel.addRow(array[i]);
+            for (int i = 0; i < array.length; i++) {
+                partTableModel.addRow(array[i]);
+            }
             partsTable.setModel(partTableModel);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+    }
+    
+     private void deletePart() {
+        int idx = partsTable.getSelectedRow();
+        String[] param = new String[5]; 
+        for (int i = 0; i < 5; i++) {
+            param[i] = (String) partsTable.getValueAt(idx, i);
+        }
+        partTableModel.removeRow(idx);
+        PartDB parts = new PartDB();
+        parts.deleteData(param);
+     }
+    
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource()==updateButton) {
+            updatePart();
         }
     }//GEN-LAST:event_updateButtonActionPerformed
 
@@ -432,15 +573,7 @@ public class MechanicJFrame extends javax.swing.JFrame {
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
         if (evt.getSource()==deleteButton) {
-            int idx = partsTable.getSelectedRow();
-            String[] param = new String[5];
-            for (int i = 0; i < 5; i++) {
-                param[i] = (String) partsTable.getValueAt(idx, i);
-            }
-            partTableModel.removeRow(idx);
-            PartDB parts = new PartDB();
-            parts.deleteData(param);
-            System.out.println("return to main form");
+            deletePart();
 
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
@@ -451,6 +584,9 @@ public class MechanicJFrame extends javax.swing.JFrame {
         lastnameField.setText(lastname);
         loginField.setText(login);
         passwordField.setText(password);
+        
+        updatePart();
+        updateRequestList();
     }//GEN-LAST:event_formWindowOpened
 
     private void saveProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProfileButtonActionPerformed
@@ -474,6 +610,105 @@ public class MechanicJFrame extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_quitProfileButtonActionPerformed
+
+    private void requestListTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestListTableMouseClicked
+        // TODO add your handling code here:
+        int idx = requestListTable.getSelectedRow();
+        System.out.println(idx);
+        Vector<Vector> vector = requestListModel.getDataVector();
+        int orderId = Integer.parseInt(vector.elementAt(idx).elementAt(0).toString());
+        requestId = Integer.parseInt(vector.elementAt(idx).elementAt(0).toString());
+        System.out.println(orderId);
+        try {
+            String query = "SELECT count(*)\n" +
+            "FROM order_work INNER JOIN work ON order_work.work_id=work.work_id\n" +
+            "WHERE order_id=?";
+            int n = new DataBase().count(new int[] {orderId}, query);
+            System.out.println(n);
+            query = "SELECT work_type_name, work_name, execution_duration, status " +
+            "FROM order_work INNER JOIN work ON order_work.work_id=work.work_id " +
+            "INNER JOIN work_type ON work.work_type_id=work_type.work_type_id " +
+            "WHERE order_id=?";
+            Object[][] array = new DataBase().getList(n, 4, new int[] {orderId}, query);
+            workTableModel = new DefaultTableModel();
+            Object[] columnsHeader = new String[] {"Тип работы", "Работа", "Длительность", "Статус"};
+            workTableModel.setColumnIdentifiers(columnsHeader);
+            for (int i = 0; i < array.length; i++) {
+                for (int j=0; j<array[i].length; j++) {
+                    System.out.println(array[i][j]);
+                }
+                workTableModel.addRow(array[i]);
+            }
+            workTable.setModel(workTableModel);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        int count = 0;
+        for (int i=0; i<workTableModel.getColumnCount(); i++) {
+            if (workTableModel.getValueAt(i, 3).equals("Выполнена"))
+                 count++;   
+        }
+        if (count==workTableModel.getColumnCount()) {
+            orderDoneButton.setEnabled(true);
+        } else {
+            orderDoneButton.setEnabled(false);
+        }
+        workDoneButton.setEnabled(false);
+            
+    }//GEN-LAST:event_requestListTableMouseClicked
+
+    private void workTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_workTableMouseClicked
+        // TODO add your handling code here:
+        if (workTableModel.getValueAt(workTable.getSelectedRow(), 3).equals("Не выполнена")) {
+            workDoneButton.setEnabled(true);
+        } else {
+            workDoneButton.setEnabled(false);
+        }
+    }//GEN-LAST:event_workTableMouseClicked
+
+    private void workDoneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workDoneButtonActionPerformed
+        // TODO add your handling code here:
+        workDoneButton.setEnabled(false);
+        int idx = workTable.getSelectedRow();
+        Vector<Vector> vector = workTableModel.getDataVector();
+        String workName = vector.elementAt(idx).elementAt(1).toString();
+        int workId = dataBase.getItem(
+                new String[] {workName}, 
+                "SELECT work_id " + 
+                "FROM work " + 
+                "WHERE work_name=?"
+        );
+        System.out.println(requestId + " " + workId);
+        dataBase.setRow(
+                new int[] {requestId, workId}, 
+                "UPDATE order_work " + 
+                "SET status='Выполнена' " + 
+                "WHERE order_id=? AND work_id=?"
+        );
+        System.out.println("works");
+        workTableModel.setValueAt("Выполнена", idx, 3);
+        
+        int count = 0;
+        for (int i=0; i<workTableModel.getColumnCount(); i++) {
+            if (workTableModel.getValueAt(i, 3).equals("Выполнена"))
+                 count++;   
+        }
+        if (count==workTableModel.getColumnCount())
+            orderDoneButton.setEnabled(true);
+    }//GEN-LAST:event_workDoneButtonActionPerformed
+
+    private void orderDoneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderDoneButtonActionPerformed
+        // TODO add your handling code here:
+        orderDoneButton.setEnabled(false);
+        dataBase.setRow(
+                new int[] {requestId}, 
+                "UPDATE \"order\" " + 
+                "SET status='Выполнен' " + 
+                "WHERE order_id=?"
+        );
+        updateRequestList();
+    }//GEN-LAST:event_orderDoneButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -520,6 +755,8 @@ public class MechanicJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextField lastnameField;
     private javax.swing.JLabel lastnameLabel;
     private javax.swing.JTextField loginField;
@@ -529,6 +766,7 @@ public class MechanicJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel newRequestsLabel;
+    private javax.swing.JButton orderDoneButton;
     private javax.swing.JPanel orders;
     private javax.swing.JPanel partsDB;
     private javax.swing.JTable partsTable;
@@ -537,8 +775,11 @@ public class MechanicJFrame extends javax.swing.JFrame {
     private javax.swing.JTabbedPane profile;
     private javax.swing.JPanel profile1;
     private javax.swing.JButton quitProfileButton;
+    private javax.swing.JTable requestListTable;
     private javax.swing.JButton saveProfileButton;
     private javax.swing.JLabel tonAuto;
     private javax.swing.JButton updateButton;
+    private javax.swing.JButton workDoneButton;
+    private javax.swing.JTable workTable;
     // End of variables declaration//GEN-END:variables
 }

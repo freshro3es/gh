@@ -29,7 +29,7 @@ public class AdminJFrame extends javax.swing.JFrame {
     private static String password;
     private static String role;
     
-    private static int requestIdx;
+    private static int requestId;
 
     /**
      * Creates new form mainJFrame
@@ -865,13 +865,14 @@ public class AdminJFrame extends javax.swing.JFrame {
      private void updateRequestList() {
         try {
             int n = new DataBase().count(
-                    "SELECT count(*) FROM \"order\""
+                    "SELECT count(*) FROM \"order\" WHERE status = 'Заявка'"
             );
             Object[][] array = new DataBase().getList(
                     n, 
                     6,  
                     "SELECT order_id, name, lastname, phone, email, status " + 
-                    "FROM \"order\" " 
+                    "FROM \"order\" " + 
+                    "WHERE status = 'Заявка'" 
             );
             requestListModel = new DefaultTableModel();
             Object[] columnsHeader = new String[] {"№ заказа", "Имя", "Фамилия", "Телефон", "Email", "Статус"};
@@ -1037,10 +1038,10 @@ public class AdminJFrame extends javax.swing.JFrame {
     private void requestListTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestListTableMouseClicked
         // TODO add your handling code here:
         int idx = requestListTable.getSelectedRow();
-        requestIdx = requestListTable.getSelectedRow();
         System.out.println(idx);
         Vector<Vector> vector = requestListModel.getDataVector();
         int orderId = Integer.parseInt(vector.elementAt(idx).elementAt(0).toString());
+        requestId = Integer.parseInt(vector.elementAt(idx).elementAt(0).toString());
         System.out.println(orderId);
         try {
             String query = "SELECT count(*)\n" +
@@ -1077,11 +1078,10 @@ public class AdminJFrame extends javax.swing.JFrame {
     private void orderCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderCreateButtonActionPerformed
         // TODO add your handling code here:
         String[] param = null;
-        requestIdx+=1;
         try {
             param = dataBase.getRow(
                     5,
-                    new int[] {requestIdx},
+                    new int[] {requestId},
                     "SELECT login, name, lastname, phone, email " +
                     "FROM \"order\" " +
                     "WHERE order_id=?"
@@ -1090,12 +1090,12 @@ public class AdminJFrame extends javax.swing.JFrame {
             Logger.getLogger(AdminJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         dataBase.delete(
-                new int[] {requestIdx}, 
+                new int[] {requestId}, 
                 "DELETE FROM \"order\" " + 
                 "WHERE order_id=? "
         );
         dataBase.delete(
-                new int[] {requestIdx}, 
+                new int[] {requestId}, 
                 "DELETE FROM order_work " + 
                 "WHERE order_id=? "
         );
@@ -1109,7 +1109,8 @@ public class AdminJFrame extends javax.swing.JFrame {
                 new String[] {param[0]}, 
                 "SELECT MAX(order_id) " + 
                 "FROM \"order\" " + 
-                "WHERE login=? AND status='Заказ'");
+                "WHERE login=? AND status='Заказ'"
+        );
         
         Object[] array = new Object[workTableModel.getColumnCount()];
         Vector<Vector> vector = workTableModel.getDataVector();
